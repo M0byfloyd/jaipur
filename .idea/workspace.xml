@@ -113,7 +113,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601014104042</updated>
-      <workItem from="1601014105077" duration="5331000" />
+      <workItem from="1601014105077" duration="6968000" />
     </task>
     <servers />
   </component>
@@ -121,10 +121,14 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601018909553">
+    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601021047567">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018909553" />
+    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601021047567" />
+    <state x="304" y="412" key="Github.CreateGistDialog" timestamp="1601019735473">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="304" y="412" key="Github.CreateGistDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601019735473" />
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601018960928">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -133,9 +137,9 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018960928" />
-    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1601018890560">
+    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1601020249017">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601018890560" />
+    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601020249017" />
   </component>
 </project>

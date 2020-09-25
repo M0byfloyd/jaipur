@@ -35,7 +35,7 @@ class Game
     private $joueur2;
 
     /**
-     * @ORM\OneToOne(targetEntity=GameUserInterface::class, mappedBy="Game", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=GameUser::class, mappedBy="Game", cascade={"persist", "remove"})
      */
     private $gameUser;
 
@@ -114,12 +114,12 @@ class Game
         return $this;
     }
 
-    public function getGameUser(): ?GameUserInterface
+    public function getGameUser(): ?GameUser
     {
         return $this->gameUser;
     }
 
-    public function setGameUser(GameUserInterface $gameUser): self
+    public function setGameUser(GameUser $gameUser): self
     {
         $this->gameUser = $gameUser;
 

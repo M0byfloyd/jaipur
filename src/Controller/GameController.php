@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Game;
-use App\Entity\GameUserInterface;
+use App\Entity\GameUser;
 use App\Repository\CardRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -88,7 +88,7 @@ class GameController extends AbstractController
         shuffle($tableauCards);
 
         $game = new Game();
-        $gameJoueur1 = new GameUserInterface();
+        $gameJoueur1 = new GameUser();
         $gameJoueur1->setGame($game);
         $gameJoueur1->setUser($this->getUser());
         //on distribue 5 cartes au joueur 1
@@ -98,7 +98,7 @@ class GameController extends AbstractController
         }
         $gameJoueur1->setDeck($mainJ1);
 
-        $gameJoueur2 = new GameUserInterface();
+        $gameJoueur2 = new GameUser();
         $gameJoueur2->setGame($game);
         $gameJoueur2->setUser($adversaire);
         //on distribue 5 cartes au joueur 2

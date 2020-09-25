@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="user")
  */
 class User implements UserInterface
 {
@@ -159,14 +160,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|GameUserInterface[]
+     * @return Collection|GameUser[]
      */
     public function getGameUsers(): Collection
     {
         return $this->gameUsers;
     }
 
-    public function addGameUser(GameUserInterface $gameUser): self
+    public function addGameUser(GameUser $gameUser): self
     {
         if (!$this->gameUsers->contains($gameUser)) {
             $this->gameUsers[] = $gameUser;
@@ -176,7 +177,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeGameUser(GameUserInterface $gameUser): self
+    public function removeGameUser(GameUser $gameUser): self
     {
         if ($this->gameUsers->contains($gameUser)) {
             $this->gameUsers->removeElement($gameUser);
