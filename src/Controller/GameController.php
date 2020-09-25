@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Game;
-use App\Entity\GameUser;
+use App\Entity\PlayUser;
 use App\Repository\CardRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -87,18 +87,23 @@ class GameController extends AbstractController
 
         shuffle($tableauCards);
 
+
+        //Création d'une partie
         $game = new Game();
-        $gameJoueur1 = new GameUser();
+        //Ajout d'une interface pour le joueur 1
+        $gameJoueur1 = new PlayUser();
+        //Assignation de la partie à l'interface
         $gameJoueur1->setGame($game);
         $gameJoueur1->setUser($this->getUser());
-        //on distribue 5 cartes au joueur 1
+        //Distribution de 5 cartes au joueur 1
         $mainJ1 = [];
         for ($i = 0; $i < 5; $i++){
             $mainJ1[] = array_pop($tableauCards);
         }
+        //Assignation des 5 cartes au joueur 1
         $gameJoueur1->setDeck($mainJ1);
 
-        $gameJoueur2 = new GameUser();
+        $gameJoueur2 = new PlayUser();
         $gameJoueur2->setGame($game);
         $gameJoueur2->setUser($adversaire);
         //on distribue 5 cartes au joueur 2

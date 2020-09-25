@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\GameUser;
+use App\Entity\PlayUser;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method GameUser|null find($id, $lockMode = null, $lockVersion = null)
- * @method GameUser|null findOneBy(array $criteria, array $orderBy = null)
- * @method GameUser[]    findAll()
- * @method GameUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PlayUser|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PlayUser|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PlayUser[]    findAll()
+ * @method PlayUser[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class GameUserRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, GameUser::class);
+        parent::__construct($registry, PlayUser::class);
     }
 
     // /**

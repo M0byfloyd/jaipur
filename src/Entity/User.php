@@ -43,7 +43,7 @@ class User implements UserInterface
     private $games;
 
     /**
-     * @ORM\OneToMany(targetEntity=GameUserInterface::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=PlayUser::class, mappedBy="user")
      */
     private $gameUsers;
 
@@ -160,14 +160,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|GameUser[]
+     * @return Collection|PlayUser[]
      */
     public function getGameUsers(): Collection
     {
         return $this->gameUsers;
     }
 
-    public function addGameUser(GameUser $gameUser): self
+    public function addGameUser(PlayUser $gameUser): self
     {
         if (!$this->gameUsers->contains($gameUser)) {
             $this->gameUsers[] = $gameUser;
@@ -177,7 +177,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeGameUser(GameUser $gameUser): self
+    public function removeGameUser(PlayUser $gameUser): self
     {
         if ($this->gameUsers->contains($gameUser)) {
             $this->gameUsers->removeElement($gameUser);

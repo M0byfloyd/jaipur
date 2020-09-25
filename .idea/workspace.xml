@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="" />
+    <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Game.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/GameUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/GameUserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GameUserRepository.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -113,7 +128,10 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1601014104042</updated>
-      <workItem from="1601014105077" duration="6968000" />
+      <workItem from="1601014105077" duration="8508000" />
+      <workItem from="1601025564325" duration="285000" />
+      <workItem from="1601027289152" duration="3138000" />
+      <workItem from="1601035741049" duration="13000" />
     </task>
     <servers />
   </component>
@@ -121,10 +139,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601021047567">
+    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601031030144">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601021047567" />
+    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601031030144" />
     <state x="304" y="412" key="Github.CreateGistDialog" timestamp="1601019735473">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -137,9 +155,13 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018960928" />
-    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1601020249017">
+    <state x="143" y="245" key="run.anything.popup" timestamp="1601025838076">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601020249017" />
+    <state x="143" y="245" key="run.anything.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601025838076" />
+    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1601022007388">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601022007388" />
   </component>
 </project>

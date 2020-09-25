@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=GameUserRepository::class)
- *  @ORM\Table(name="game_user_interface")
+ *  @ORM\Table(name="play_user")
  */
-class GameUser
+class PlayUser
 {
     /**
      * @ORM\Id
