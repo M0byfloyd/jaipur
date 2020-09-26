@@ -26,11 +26,14 @@ class Game
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="games")
+     * @ORM\JoinTable(name="game_user_1")
+     * )
      */
     private $joueur1;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, inversedBy="games")
+     * @ORM\JoinTable (name="game_user_2")
      */
     private $joueur2;
 

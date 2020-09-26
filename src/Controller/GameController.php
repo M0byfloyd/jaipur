@@ -12,13 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 
-
 /**
  * Class GameController
  * @package App\Controller
  * @Route("/game")
  */
-
 class GameController extends AbstractController
 {
     /**
@@ -30,6 +28,7 @@ class GameController extends AbstractController
             'controller_name' => 'GameController',
         ]);
     }
+
     /**
      * @Route("/select-adversaire", name="game_select_adversaire")
      */
@@ -42,6 +41,7 @@ class GameController extends AbstractController
             'users' => $users
         ]);
     }
+
     /**
      * @Route("/show-game/{game}", name="show_game")
      */
@@ -51,14 +51,13 @@ class GameController extends AbstractController
     {
         $cards = $cardRepository->findAll();
         $tableauCards = [];
-        foreach ($cards as $card)
-        {
+        foreach ($cards as $card) {
             $tableauCards[$card->getId()] = $card;
         }
 
         return $this->render('game/showGame.html.twig', [
             'game' => $game,
-            'joueur1' => $game->getPlayGames()[0],
+            'joueur1' => $game->getPlayUser()[0],
             'joueur2' => $game->getPlayGames()[1],
             'tableauCards' => $tableauCards
         ]);
@@ -80,8 +79,7 @@ class GameController extends AbstractController
         $cards = $cardRepository->findAll();
         $tableauCards = [];
 
-        foreach ($cards as $card)
-        {
+        foreach ($cards as $card) {
             $tableauCards[] = $card->getId();
         }
 
@@ -91,32 +89,35 @@ class GameController extends AbstractController
         //Création d'une partie
         $game = new Game();
         //Ajout d'une interface pour le joueur 1
-        $gameJoueur1 = new PlayUser();
+        $playJoueur1 = new PlayUser();
         //Assignation de la partie à l'interface
-        $gameJoueur1->setGame($game);
-        $gameJoueur1->setUser($this->getUser());
+        $playJoueur1->setGame($game);
+        $playJoueur1->setUser($this->getUser());
         //Distribution de 5 cartes au joueur 1
         $mainJ1 = [];
-        for ($i = 0; $i < 5; $i++){
+        for ($i = 0; $i < 5; $i++) {
             $mainJ1[] = array_pop($tableauCards);
         }
         //Assignation des 5 cartes au joueur 1
-        $gameJoueur1->setDeck($mainJ1);
+        $playJoueur1->setDeck($mainJ1);
 
-        $gameJoueur2 = new PlayUser();
-        $gameJoueur2->setGame($game);
-        $gameJoueur2->setUser($adversaire);
+        $playJoueur2 = new PlayUser();
+        $playJoueur2->setGame($game);
+        $playJoueur2->setUser($adversaire);
         //on distribue 5 cartes au joueur 2
         $mainJ2 = [];
-        for ($i = 0; $i < 5; $i++){
+        for ($i = 0; $i < 5; $i++) {
             $mainJ2[] = array_pop($tableauCards);
 
         }
-        $gameJoueur2->setDeck($mainJ2);
+        $playJoueur2->setDeck($mainJ2);
 
         $entityManager->persist($game);
-        $entityManager->persist($gameJoueur1);
-        $entityManager->persist($gameJoueur2);
+        $entityManager->persist($playJoueur1);
+        $entityManager->persist($playJoueur2);
+        dump($playJoueur1);
+        dump($playJoueur2);
+        dump($entityManager);
         $entityManager->flush();
 
         return $this->render('game/new.html.twig', [
