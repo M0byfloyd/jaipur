@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Game;
 use App\Entity\PlayUser;
 use App\Repository\CardRepository;
@@ -88,6 +89,7 @@ class GameController extends AbstractController
 
         //Création d'une partie
         $game = new Game();
+
         //Ajout d'une interface pour le joueur 1
         $playJoueur1 = new PlayUser();
         //Assignation de la partie à l'interface
@@ -115,9 +117,18 @@ class GameController extends AbstractController
         $entityManager->persist($game);
         $entityManager->persist($playJoueur1);
         $entityManager->persist($playJoueur2);
+
+        dump($game);
+
+        dump($this->getUser());
+        dump($adversaire);
+
         dump($playJoueur1);
         dump($playJoueur2);
-        dump($entityManager);
+
+
+        dd($entityManager);
+
         $entityManager->flush();
 
         return $this->render('game/new.html.twig', [
