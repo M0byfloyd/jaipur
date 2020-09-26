@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\GameUserRepository;
+use App\Repository\PlayUserRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=GameUserRepository::class)
+ * @ORM\Entity(repositoryClass=PlayUserRepository::class)
  *  @ORM\Table(name="play_user")
  */
 class PlayUser

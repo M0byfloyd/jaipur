@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Repository/GameUserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PlayUserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/PlayUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PlayUserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PlayUserRepository.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +127,7 @@
       <workItem from="1601025564325" duration="285000" />
       <workItem from="1601027289152" duration="3138000" />
       <workItem from="1601035741049" duration="13000" />
-      <workItem from="1601039360985" duration="317000" />
+      <workItem from="1601039360985" duration="1447000" />
     </task>
     <servers />
   </component>
