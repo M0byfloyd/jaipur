@@ -5,28 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/baie.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/collier.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/dos.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/fourrure.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/mammouth.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/outil.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/peinture.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/cartes/viande.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/img/toumai_brun.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Token.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/game/showGame.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Game.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Card.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/PlayUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/showGame.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/showGame.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +147,7 @@
       <workItem from="1601293301080" duration="1197000" />
       <workItem from="1601303413157" duration="1453000" />
       <workItem from="1601312176388" duration="2372000" />
-      <workItem from="1601328243779" duration="8370000" />
+      <workItem from="1601328243779" duration="15615000" />
     </task>
     <servers />
   </component>
@@ -171,10 +155,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser" timestamp="1601362032841">
+    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser" timestamp="1601367526868">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1601362032841" />
+    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1601367526868" />
     <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601039640754">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>

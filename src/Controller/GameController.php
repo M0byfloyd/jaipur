@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Game;
 use App\Entity\PlayUser;
 use App\Repository\CardRepository;
@@ -28,7 +27,7 @@ class GameController extends AbstractController
     {
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
-            'joueurConnected'=>$this->getUser(),
+            'joueurConnected' => $this->getUser(),
         ]);
     }
 
@@ -42,7 +41,7 @@ class GameController extends AbstractController
 
         return $this->render('game/selectAdversaire.html.twig', [
             'users' => $users,
-            'joueurConnected'=>$this->getUser()
+            'joueurConnected' => $this->getUser()
         ]);
     }
 
@@ -53,7 +52,7 @@ class GameController extends AbstractController
         CardRepository $cardRepository,
         Game $game,
         GameRepository $gameRepository
-)
+    )
     {
         $cards = $cardRepository->findAll();
 
@@ -63,7 +62,7 @@ class GameController extends AbstractController
         }
         $pioche = [];
         foreach ($cards as $piocheCard) {
-            $pioche[$piocheCard->getId()] =$piocheCard;
+            $pioche[$piocheCard->getId()] = $piocheCard;
         }
         $terrain = [];
         foreach ($cards as $terrainCard) {
@@ -76,9 +75,9 @@ class GameController extends AbstractController
             'joueur1' => $game->getGameUser()[0],
             'joueur2' => $game->getGameUser()[1],
             'tableauCards' => $tableauCards,
-            'joueurConnected'=>$this->getUser(),
-            'pioche' =>$pioche,
-            'terrain' =>$terrain
+            'joueurConnected' => $this->getUser(),
+            'pioche' => $pioche,
+            'terrain' => $terrain
         ]);
     }
 
@@ -96,16 +95,34 @@ class GameController extends AbstractController
 
         //récupération de toutes les cartes
         $cards = $cardRepository->findAll();
+        /*foreach ($cards as $card) {
+            $tableauCards[] = $card->getId();
+        }
+        shuffle($tableauCards);*/
+
+
+        //récupéation des jetons
+
+
+        //Création des tableau
         $tableauCards = [];
 
+        //Création du terrain
+        $terrain = [];
+        $max = 0;
+        //Ajout de trois mammouth en début de partie sur le terrain
         foreach ($cards as $card) {
-            $tableauCards[] = $card->getId();
+            if ($card->getCamel() === true && $max < 3) {
+                $terrain[] = $card->getId();
+                $max++;
+            } else {
+                $tableauCards[] = $card->getId();
+            }
         }
 
         shuffle($tableauCards);
 
-
-        //Création d'une partie
+        //Création de la partie
         $game = new Game();
 
         //Ajout d'une interface pour le joueur 1
@@ -121,7 +138,11 @@ class GameController extends AbstractController
         //Assignation des 5 cartes au joueur 1
         $playJoueur1->setDeck($mainJ1);
 
+
+        //Ajout d'une interface pour le joueur 2
+
         $playJoueur2 = new PlayUser();
+        //Assignation de la partie à l'interface
         $playJoueur2->setGame($game);
         $playJoueur2->setUser($adversaire);
         //on distribue 5 cartes au joueur 2
@@ -130,27 +151,32 @@ class GameController extends AbstractController
             $mainJ2[] = array_pop($tableauCards);
 
         }
-        for ($i = 0; $i < 5; $i++) {
-        $terrain[] = array_pop($tableauCards);
-    }
-        $game->setTerrain($terrain);
-        $pioche = $tableauCards;
 
-        $game->setPioche($pioche);
-
-        $game->setStatut(0);
+        //Assignation des 5 cartes au joueur 2
         $playJoueur2->setDeck($mainJ2);
 
+        $terrain[] = array_pop($tableauCards);
+        $terrain[] = array_pop($tableauCards);
+
+        $playJoueur1->setCamel(0);
+        $playJoueur2->setCamel(1);
+        $game->setTerrain($terrain);
+
+        $game->setPioche($tableauCards);
+
+        $game->setStatut(0);
+
+
+        //Persist des données
         $entityManager->persist($game);
         $entityManager->persist($playJoueur1);
         $entityManager->persist($playJoueur2);
 
 
-
         $entityManager->flush();
 
         return $this->render('game/new.html.twig', [
-            'joueurConnected'=>$this->getUser()
+            'joueurConnected' => $this->getUser()
         ]);
     }
 }

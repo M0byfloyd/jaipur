@@ -16,6 +16,26 @@ class Card
      * @ORM\Column(type="integer")
      */
     private $id;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $camel;
+
+    /**
+     * @return mixed
+     */
+    public function getCamel()
+    {
+        return $this->camel;
+    }
+
+    /**
+     * @param mixed $camel
+     */
+    public function setCamel($camel): void
+    {
+        $this->camel = $camel;
+    }
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)

@@ -35,6 +35,11 @@ class PlayUser
      */
     private $deck = [];
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $camel;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -72,6 +77,18 @@ class PlayUser
     public function setDeck(array $deck): self
     {
         $this->deck = $deck;
+
+        return $this;
+    }
+
+    public function getCamel(): ?int
+    {
+        return $this->camel;
+    }
+
+    public function setCamel(int $camel): self
+    {
+        $this->camel = $camel;
 
         return $this;
     }
