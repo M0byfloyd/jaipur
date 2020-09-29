@@ -11,6 +11,11 @@
 <div class="example-wrapper">
     <h1>Hello {{ controller_name }}! ✅</h1>
 
-    <a href="{{ path() }}">Commencer une partie</a>
+    <a href="{{ path("game_select_adversaire") }}">Commencer une partie</a>
+    <p>OU</p>
+    <p>Vos parties déjà en cours :</p>
+
+
+
 </div>
 {% endblock %}

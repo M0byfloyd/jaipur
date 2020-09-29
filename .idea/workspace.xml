@@ -5,10 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/baie.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/collier.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/dos.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/fourrure.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/mammouth.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/outil.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/peinture.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/cartes/viande.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/toumai_brun.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/Token.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/showGame.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Game.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/PlayUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/game/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/new.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +134,15 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\apps\projet_symfony\sarabande\public\img" />
+      <recent name="F:\apps\projet_symfony\sarabande\public" />
+      <recent name="F:\apps\projet_symfony\sarabande\asset" />
+      <recent name="F:\apps\projet_symfony\sarabande" />
+      <recent name="F:\apps\projet_symfony\sarabande\asset\img\cartes" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -131,7 +158,12 @@
       <workItem from="1601039360985" duration="3652000" />
       <workItem from="1601043655044" duration="2282000" />
       <workItem from="1601053979163" duration="2977000" />
-      <workItem from="1601116829940" duration="4692000" />
+      <workItem from="1601116829940" duration="14908000" />
+      <workItem from="1601277430908" duration="8634000" />
+      <workItem from="1601293301080" duration="1197000" />
+      <workItem from="1601303413157" duration="1453000" />
+      <workItem from="1601312176388" duration="2372000" />
+      <workItem from="1601328243779" duration="8370000" />
     </task>
     <servers />
   </component>
@@ -139,6 +171,10 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser" timestamp="1601362032841">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1601362032841" />
     <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601039640754">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -147,21 +183,33 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="304" y="412" key="Github.CreateGistDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601019735473" />
+    <state x="1222" y="251" key="NewPhpClassDialog" timestamp="1601364058485">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1222" y="251" key="NewPhpClassDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601364058485" />
+    <state x="1274" y="451" key="NewPhpFileDialog" timestamp="1601364034219">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1274" y="451" key="NewPhpFileDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601364034219" />
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601018960928">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018960928" />
-    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1601018960928">
+    <state x="93" y="100" width="774" height="857" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1601314346263">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018960928" />
+    <state x="93" y="100" width="774" height="857" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601314346263" />
+    <state x="1257" y="442" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601132920148">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1257" y="442" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1050@0.0.1920.1050" timestamp="1601132920148" />
     <state x="143" y="245" key="run.anything.popup" timestamp="1601025838076">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="143" y="245" key="run.anything.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601025838076" />
-    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1601022007388">
+    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup" timestamp="1601314125357">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601022007388" />
+    <state x="143" y="233" width="672" height="678" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1601314125357" />
   </component>
 </project>

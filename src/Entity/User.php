@@ -37,10 +37,6 @@ class User implements UserInterface
      */
     private $password;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Game::class, mappedBy="joueur1")
-     */
-    private $games;
 
     /**
      * @ORM\OneToMany(targetEntity=PlayUser::class, mappedBy="user")

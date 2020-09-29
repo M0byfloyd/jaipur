@@ -25,13 +25,13 @@ class PlayUser
     private $user;
 
     /**
-     * @ORM\OneToOne(targetEntity=Game::class, inversedBy="gameUser", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=Game::class, inversedBy="gameUser", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $Game;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="json")
      */
     private $deck = [];
 

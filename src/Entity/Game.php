@@ -25,22 +25,81 @@ class Game
     private $partie_score_final = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="games")
-     * @ORM\JoinTable(name="game_user_1")
-     * )
+     * @ORM\Column(type="json")
      */
-    private $joueur1;
+    private $defausse = [];
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="games")
-     * @ORM\JoinTable (name="game_user_2")
+     * @return array
      */
-    private $joueur2;
+    public function getDefausse(): array
+    {
+        return $this->defausse;
+    }
 
     /**
-     * @ORM\OneToOne(targetEntity=PlayUser::class, mappedBy="Game", cascade={"persist", "remove"})
+     * @param array $defausse
+     */
+    public function setDefausse(array $defausse): void
+    {
+        $this->defausse = $defausse;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity=PlayUser::class, mappedBy="Game", cascade={"persist", "remove"})
      */
     private $gameUser;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $statut;
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $terrain = [];
+
+    /**
+     * @return array
+     */
+    public function getTerrain(): array
+    {
+        return $this->terrain;
+    }
+
+    /**
+     * @param array $terrain
+     */
+    public function setTerrain(array $terrain): void
+    {
+        $this->terrain = $terrain;
+    }
+
+
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $pioche = [];
+
+    /**
+     * @return array
+     */
+
+
+    public function getPioche(): array
+    {
+        return $this->pioche;
+    }
+
+    /**
+     * @param array $pioche
+     */
+    public function setPioche(array $pioche): void
+    {
+        $this->pioche = $pioche;
+    }
 
     public function __construct()
     {
@@ -117,10 +176,15 @@ class Game
         return $this;
     }
 
-    public function getGameUser(): ?PlayUser
+    /**
+     * @return Collection|GameUser[]
+     */
+    public function getGameUser(): Collection
     {
         return $this->gameUser;
     }
+
+
 
     public function setGameUser(PlayUser $gameUser): self
     {
@@ -130,6 +194,18 @@ class Game
         if ($gameUser->getGame() !== $this) {
             $gameUser->setGame($this);
         }
+
+        return $this;
+    }
+
+    public function getStatut(): ?bool
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(bool $statut): self
+    {
+        $this->statut = $statut;
 
         return $this;
     }

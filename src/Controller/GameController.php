@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Game;
 use App\Entity\PlayUser;
 use App\Repository\CardRepository;
+use App\Repository\GameRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,6 +28,7 @@ class GameController extends AbstractController
     {
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
+            'joueurConnected'=>$this->getUser(),
         ]);
     }
 
@@ -39,7 +41,8 @@ class GameController extends AbstractController
         $users = $userRepository->findAll();
 
         return $this->render('game/selectAdversaire.html.twig', [
-            'users' => $users
+            'users' => $users,
+            'joueurConnected'=>$this->getUser()
         ]);
     }
 
@@ -48,19 +51,34 @@ class GameController extends AbstractController
      */
     public function showGame(
         CardRepository $cardRepository,
-        Game $game)
+        Game $game,
+        GameRepository $gameRepository
+)
     {
         $cards = $cardRepository->findAll();
+
         $tableauCards = [];
         foreach ($cards as $card) {
             $tableauCards[$card->getId()] = $card;
         }
+        $pioche = [];
+        foreach ($cards as $piocheCard) {
+            $pioche[$piocheCard->getId()] =$piocheCard;
+        }
+        $terrain = [];
+        foreach ($cards as $terrainCard) {
+            $terrain[$terrainCard->getId()] = $terrainCard;
+        }
+
 
         return $this->render('game/showGame.html.twig', [
             'game' => $game,
-            'joueur1' => $game->getPlayUser()[0],
-            'joueur2' => $game->getPlayGames()[1],
-            'tableauCards' => $tableauCards
+            'joueur1' => $game->getGameUser()[0],
+            'joueur2' => $game->getGameUser()[1],
+            'tableauCards' => $tableauCards,
+            'joueurConnected'=>$this->getUser(),
+            'pioche' =>$pioche,
+            'terrain' =>$terrain
         ]);
     }
 
@@ -112,26 +130,27 @@ class GameController extends AbstractController
             $mainJ2[] = array_pop($tableauCards);
 
         }
+        for ($i = 0; $i < 5; $i++) {
+        $terrain[] = array_pop($tableauCards);
+    }
+        $game->setTerrain($terrain);
+        $pioche = $tableauCards;
+
+        $game->setPioche($pioche);
+
+        $game->setStatut(0);
         $playJoueur2->setDeck($mainJ2);
 
         $entityManager->persist($game);
         $entityManager->persist($playJoueur1);
         $entityManager->persist($playJoueur2);
 
-        dump($game);
 
-        dump($this->getUser());
-        dump($adversaire);
-
-        dump($playJoueur1);
-        dump($playJoueur2);
-
-
-        dd($entityManager);
 
         $entityManager->flush();
 
         return $this->render('game/new.html.twig', [
+            'joueurConnected'=>$this->getUser()
         ]);
     }
 }
