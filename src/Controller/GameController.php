@@ -4,13 +4,18 @@ namespace App\Controller;
 
 use App\Entity\Game;
 use App\Entity\PlayUser;
+use App\Entity\Token;
 use App\Repository\CardRepository;
 use App\Repository\GameRepository;
+use App\Repository\PlayUserRepository;
+use App\Repository\SpecialTokenRepository;
+use App\Repository\TokenRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -23,11 +28,29 @@ class GameController extends AbstractController
     /**
      * @Route("/", name="game")
      */
-    public function index()
+    public function index(
+        PlayUserRepository $playUserRepository,
+        UserInterface $user,
+        GameRepository $gameRepository
+    )
     {
+
+
+        $partieEnCours = $gameRepository->findBy(
+            ['statut' => 0],
+            ['id' => 'DESC']
+        );
+
+        $partieEnCoursJoueur = $playUserRepository->findBy(
+            ['Game' => $partieEnCours],
+
+            ['id' => 'DESC']
+        );
+
         return $this->render('game/index.html.twig', [
             'controller_name' => 'GameController',
             'joueurConnected' => $this->getUser(),
+            'partieEnCours' => $partieEnCours
         ]);
     }
 
@@ -47,11 +70,19 @@ class GameController extends AbstractController
 
     /**
      * @Route("/show-game/{game}", name="show_game")
+     * @param CardRepository $cardRepository
+     * @param Game $game
+     * @param GameRepository $gameRepository
+     * @param TokenRepository $tokenRepository
+     * @param SpecialTokenRepository $specialTokenRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function showGame(
         CardRepository $cardRepository,
         Game $game,
-        GameRepository $gameRepository
+        GameRepository $gameRepository,
+        TokenRepository $tokenRepository,
+        SpecialTokenRepository $specialTokenRepository
     )
     {
         $cards = $cardRepository->findAll();
@@ -64,10 +95,13 @@ class GameController extends AbstractController
         foreach ($cards as $piocheCard) {
             $pioche[$piocheCard->getId()] = $piocheCard;
         }
+
+        $tableauTokens = $tokenRepository->findArrayById();
         $terrain = [];
         foreach ($cards as $terrainCard) {
             $terrain[$terrainCard->getId()] = $terrainCard;
         }
+        $tableauSpecialToken = $specialTokenRepository->findArrayById();
 
 
         return $this->render('game/showGame.html.twig', [
@@ -77,7 +111,9 @@ class GameController extends AbstractController
             'tableauCards' => $tableauCards,
             'joueurConnected' => $this->getUser(),
             'pioche' => $pioche,
-            'terrain' => $terrain
+            'terrain' => $terrain,
+            'tableauTokens' => $tableauTokens,
+            'tableauSpecialToken' => $tableauSpecialToken
         ]);
     }
 
@@ -87,13 +123,15 @@ class GameController extends AbstractController
     public function newGame(
         EntityManagerInterface $entityManager,
         CardRepository $cardRepository,
+        TokenRepository $tokenRepository,
         UserRepository $userRepository,
+        SpecialTokenRepository $specialTokenRepository,
         Request $request)
     {
         $idAdversaire = $request->request->get('adversaire');
         $adversaire = $userRepository->find($idAdversaire);
 
-        //récupération de toutes les cartes
+        //Récupération des cartes
         $cards = $cardRepository->findAll();
         /*foreach ($cards as $card) {
             $tableauCards[] = $card->getId();
@@ -101,11 +139,36 @@ class GameController extends AbstractController
         shuffle($tableauCards);*/
 
 
-        //récupéation des jetons
+        //Récupéation des jetons
+        $tokens = $tokenRepository->findBy([], array('value' => 'ASC'));
+
+        //Récupération des jetons spéciaux
+        $specialTokens = $specialTokenRepository->findAll();
 
 
-        //Création des tableau
+
+
+        //Création des tableaux de données
         $tableauCards = [];
+        $tableauTokens = [];
+        $tableauSpecialTokens = [3=>[],4=>[],5=>[]];
+
+        foreach (Token::RESSOURCE as $ressource) {
+            $tableauTokens[$ressource] = [];
+        }
+        foreach ($tokens as $token) {
+            $tableauTokens[$token->getRessource()][] = $token->getId();
+        }
+        foreach ($specialTokens as $token)
+        {
+            $tableauSpecialTokens[$token->getNbCards()][] = $token->getId();
+        }
+
+        //Mélange des tableau de jetons spéciaux
+        shuffle($tableauSpecialTokens[3]);
+        shuffle($tableauSpecialTokens[4]);
+        shuffle($tableauSpecialTokens[5]);
+
 
         //Création du terrain
         $terrain = [];
@@ -159,10 +222,13 @@ class GameController extends AbstractController
         $terrain[] = array_pop($tableauCards);
 
         $playJoueur1->setCamel(0);
-        $playJoueur2->setCamel(1);
+        $playJoueur2->setCamel(0);
         $game->setTerrain($terrain);
 
         $game->setPioche($tableauCards);
+
+        $game->setTokens($tableauTokens);
+        $game->setSpecialTokens($tableauSpecialTokens);
 
         $game->setStatut(0);
 

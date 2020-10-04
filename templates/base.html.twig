@@ -32,10 +32,14 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="{{ path('game') }}">Jouer</a>
-                <a class="nav-link" href="#">Mon profil</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                <a href="{{ path('app_logout') }}">Se déconecter</a>
+                <a class="nav-link active" href="{{ path('game') }}">Jouer</a>
+                <a class="nav-link active" href="#">Mon profil</a>
+                {% if joueurConnected is empty %}
+                    <a class="nav-link active" href="{{ path('app_login') }}">Se conecter</a>
+
+                {% else %}
+                    <a class="nav-link active" href="{{ path('app_logout') }}">Se déconecter</a>
+                {% endif %}
             </div>
         </div>
 

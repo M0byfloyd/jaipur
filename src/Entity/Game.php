@@ -19,6 +19,13 @@ class Game
      */
     private $id;
 
+
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $tokens = [];
+
     /**
      * @ORM\Column(type="array")
      */
@@ -59,6 +66,27 @@ class Game
      * @ORM\Column(type="json")
      */
     private $terrain = [];
+
+    /**
+     * @ORM\Column(type="json")
+     */
+    private $specialTokens = [];
+
+    /**
+     * @return array
+     */
+    public function getSpecialTokens(): array
+    {
+        return $this->specialTokens;
+    }
+
+    /**
+     * @param array $specialTokens
+     */
+    public function setSpecialTokens(array $specialTokens): void
+    {
+        $this->specialTokens = $specialTokens;
+    }
 
     /**
      * @return array
@@ -208,5 +236,21 @@ class Game
         $this->statut = $statut;
 
         return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTokens(): array
+    {
+        return $this->tokens;
+    }
+
+    /**
+     * @param array $tokens
+     */
+    public function setTokens(array $tokens): void
+    {
+        $this->tokens = $tokens;
     }
 }

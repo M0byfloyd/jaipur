@@ -8,14 +8,22 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="row col-12 justify-content-center" >
 
     <a href="{{ path("game_select_adversaire") }}">Commencer une partie</a>
-    <p>OU</p>
-    <p>Vos parties déjà en cours :</p>
+    <div class="row col-12 justify-content-center">
+        <p class="text-center">OU</p>
+    </div>
+    <div>
+        <p class="text-center">Vos parties déjà en cours  :</p>
+    </div>
 
-
-
+    <div class="row col-12">
+    {% for partie in partieEnCours %}
+        <div class="row col-12 justify-content-center">
+        <a class="text-center" href="{{ path('show_game',{'game' : partie.id}) }}">Partie n°{{ partie.id }}</a>
+        </div>
+    {% endfor %}
+    </div>
 </div>
 {% endblock %}

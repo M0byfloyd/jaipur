@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Token
 {
+    public const RESSOURCE= ['viande', 'baies', 'peinture', 'outils', 'collier', 'fourrure'];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -25,7 +26,7 @@ class Token
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $type;
+    private $ressource;
 
     /**
      * @ORM\Column(type="string", length=50)
@@ -49,14 +50,14 @@ class Token
         return $this;
     }
 
-    public function getType(): ?string
+    public function getRessource(): ?string
     {
-        return $this->type;
+        return $this->ressource;
     }
 
-    public function setType(string $type): self
+    public function setRessource(string $ressource): self
     {
-        $this->type = $type;
+        $this->ressource = $ressource;
 
         return $this;
     }

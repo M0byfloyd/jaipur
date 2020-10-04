@@ -5,11 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/asset/img/fond_du_feu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/baie_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/baie_6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/collier_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/collier_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/collier_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/collier_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/feu_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/fourrure_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/fourrure_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/fourrure_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/fourrure_4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/jeton_bonus_3cartes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/jeton_bonus_4cartes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/jeton_bonus_5cartes.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/mammouth_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/outil_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/outil_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/outil_3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/outil_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/peinture_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/viande_5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/jetons/viande_7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Entity/SpecialToken.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/SpecialTokenRepository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Repository/TokenRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Card.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Card.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/PlayUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Game.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Game.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Token.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/game/showGame.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/showGame.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,15 +144,24 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/asset/img" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\apps\projet_symfony\sarabande\public\asset\img" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\apps\projet_symfony\sarabande\public\img\jetons" />
       <recent name="F:\apps\projet_symfony\sarabande\public\img" />
       <recent name="F:\apps\projet_symfony\sarabande\public" />
       <recent name="F:\apps\projet_symfony\sarabande\asset" />
       <recent name="F:\apps\projet_symfony\sarabande" />
-      <recent name="F:\apps\projet_symfony\sarabande\asset\img\cartes" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -147,7 +184,16 @@
       <workItem from="1601293301080" duration="1197000" />
       <workItem from="1601303413157" duration="1453000" />
       <workItem from="1601312176388" duration="2372000" />
-      <workItem from="1601328243779" duration="15615000" />
+      <workItem from="1601328243779" duration="16137000" />
+      <workItem from="1601384621870" duration="754000" />
+      <workItem from="1601481045654" duration="6741000" />
+      <workItem from="1601498657979" duration="4737000" />
+      <workItem from="1601535787058" duration="5155000" />
+      <workItem from="1601569577905" duration="4000" />
+      <workItem from="1601634513366" duration="4000" />
+      <workItem from="1601640127301" duration="31000" />
+      <workItem from="1601641347566" duration="1695000" />
+      <workItem from="1601816574532" duration="4407000" />
     </task>
     <servers />
   </component>
@@ -155,22 +201,24 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser" timestamp="1601367526868">
+    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser" timestamp="1601537738718">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1601367526868" />
-    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601039640754">
+    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1601537738718" />
+    <state x="273" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1601486860294" />
+    <state x="837" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1601483917286">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="41" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601039640754" />
+    <state x="837" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601483917286" />
     <state x="304" y="412" key="Github.CreateGistDialog" timestamp="1601019735473">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="304" y="412" key="Github.CreateGistDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601019735473" />
-    <state x="1222" y="251" key="NewPhpClassDialog" timestamp="1601364058485">
+    <state x="1222" y="251" key="NewPhpClassDialog" timestamp="1601537316518">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
-    <state x="1222" y="251" key="NewPhpClassDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601364058485" />
+    <state x="1222" y="251" key="NewPhpClassDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1601537316518" />
+    <state x="1222" y="251" key="NewPhpClassDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601481750549" />
     <state x="1274" y="451" key="NewPhpFileDialog" timestamp="1601364034219">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
