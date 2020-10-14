@@ -75,6 +75,28 @@ class Game
     /**
      * @return array
      */
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $joueurActif;
+
+    /**
+     * @return mixed
+     */
+    public function getJoueurActif()
+    {
+        return $this->joueurActif;
+    }
+
+    /**
+     * @param mixed $joueurActif
+     */
+    public function setJoueurActif($joueurActif): void
+    {
+        $this->joueurActif = $joueurActif;
+    }
+
     public function getSpecialTokens(): array
     {
         return $this->specialTokens;

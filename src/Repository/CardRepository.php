@@ -47,4 +47,14 @@ class CardRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findArrayById()
+    {
+        $cards = $this->findAll();
+        $t = [];
+        foreach ($cards as $card)
+        {
+            $t[$card->getId()] = $card;
+        }
+        return $t;
+    }
 }

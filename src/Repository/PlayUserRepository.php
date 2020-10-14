@@ -47,4 +47,16 @@ class PlayUserRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findPlayUser($game_id, $joueur_id)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('u')
+            ->from($this->_entityName, 'u')
+            ->where('u.Game = :game_id')
+            ->andWhere('u.user = :joueur_id')
+            ->setParameters(['game_id'=> $game_id,'joueur_id'=>$joueur_id]);
+        return $qb->getQuery()->getResult();
+
+    }
 }

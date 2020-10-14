@@ -1,0 +1,263 @@
+<div class="col-4" style="background-color: #5eb5e0">
+    <div class="row">
+        <div class="row col-12">
+            <p>Joueur 1 = {{ joueurConnected.login }} </p>
+            <p>Joueur 2 = {{ joueur2.user.login }}</p>
+        </div>
+        <div class="row col-12">
+
+            {% for token in game.tokens['viande'] %}
+                <div class="col-sm-2 " style="width: 18rem;">
+                    <img src="{{ asset('img/jetons/'~tableauTokens[token].image~"_"~tableauTokens[token].value~".png" ) }}"
+                         class="card-img-top"
+                         alt="...">
+
+                </div>
+            {% endfor %}
+        </div>
+        <br><br>
+        <div class="row col-12">
+            {% for token in game.tokens['baie'] %}
+                <div class="col-sm-2 " style="width: 18rem;">
+                    <img src="{{ asset('img/jetons/'~tableauTokens[token].ressource~"_"~tableauTokens[token].value~".png" ) }}"
+                         class="card-img-top"
+                         alt="...">
+
+                </div>
+            {% endfor %}
+        </div>
+        <br><br>
+        <div class="row col-12">
+            {% for token in game.tokens['peinture'] %}
+                <div class="col-sm-2 " style="width: 18rem;">
+                    <img src="{{ asset('img/jetons/'~tableauTokens[token].ressource~"_"~tableauTokens[token].value~".png" ) }}"
+                         class="card-img-top"
+                         alt="...">
+
+                </div>
+            {% endfor %}
+        </div>
+        <br><br>
+        <div class="col-12">
+            <div class="row">
+                <div class="col-2">
+                    <img src="{{ asset('img/jetons/jeton_bonus_3cartes.png' ) }}"
+                         class="card-img-top"
+                         alt="...">
+                </div>
+                <div class="col-2">
+                    <img src="{{ asset('img/jetons/jeton_bonus_4cartes.png' ) }}"
+                         class="card-img-top"
+                         alt="...">
+                </div>
+                <div class="col-2">
+                    <img src="{{ asset('img/jetons/jeton_bonus_5cartes.png' ) }}"
+                         class="card-img-top"
+                         alt="...">
+                </div>
+
+
+                {#
+                Affichage de TOUT les jetons bonus
+                <div class="row col-sm-2 " style="width: 18rem;">
+                     {% for token in game.specialTokens[5] %}
+                         <img src="{{ asset('img/jetons/'~tableauSpecialToken[token].image ) }}"
+                              class="card-img-top"
+                              alt="...">
+                     {% endfor %}
+                 </div>
+                 <div class="row col-sm-2 " style="width: 18rem;">
+                     {% for token in game.specialTokens[4] %}
+                         <img src="{{ asset('img/jetons/'~tableauSpecialToken[token].image ) }}"
+                              class="card-img-top"
+                              alt="...">
+                     {% endfor %}
+                 </div>
+                 <div class="row col-sm-2 " style="width: 18rem;">
+                     {% for token in game.specialTokens[3] %}
+                         <img src="{{ asset('img/jetons/'~tableauSpecialToken[token].image ) }}"
+                              class="card-img-top"
+                              alt="...">
+                     {% endfor %}
+                 </div> #}
+            </div>
+        </div>
+        <br><br>
+        <div class="row col-12">
+            {% for token in game.tokens['outils'] %}
+                <div class="col-sm-2 " style="width: 18rem;">
+                    <img src="{{ asset('img/jetons/'~tableauTokens[token].ressource~"_"~tableauTokens[token].value~".png" ) }}"
+                         class="card-img-top"
+                         alt="...">
+
+                </div>
+            {% endfor %}
+        </div>
+        <br><br>
+        <div class="row col-12">
+            {% for token in game.tokens['collier'] %}
+                <div class="col-sm-2 " style="width: 18rem;">
+                    <img src="{{ asset('img/jetons/'~tableauTokens[token].ressource~"_"~tableauTokens[token].value~".png" ) }}"
+                         class="card-img-top"
+                         alt="...">
+
+                </div>                    {% endfor %}
+        </div>
+        <br><br>
+        <div class="row col-12">
+            {% for token in game.tokens['fourrure'] %}
+                <div class="col-sm-2 " style="width: 18rem;">
+                    <img src="{{ asset('img/jetons/'~tableauTokens[token].ressource~"_"~tableauTokens[token].value~".png" ) }}"
+                         class="card-img-top"
+                         alt="...">
+
+                </div>                    {% endfor %}
+        </div>
+    </div>
+    <p>Pioche :</p>
+    {% set nbPioche = 0 %}
+    {% for carte in game.pioche %}
+        {% set nbPioche = nbPioche +1 %}
+    {% endfor %}
+    <img src="{{ asset('img/cartes/dos.png') }}" class="image card-img-top" style="width: 10rem">
+    <p class="text-center">{{ nbPioche }}</p>
+</div>
+
+<div class="col-8" style="background-color: #8959A8">
+    {% if joueurConnected.id == joueur2.user.id %}
+        <div class="row">
+            <p>Play user : {{ joueur1.id }}</p>
+            <p>User_id : {{ joueur1.user.login }}</p>
+            {% set camel = 0 %}
+            {% for carte in joueur1.deck %}
+                {% if tableauCards[carte].camel == true %}
+                    {% set camel = camel +1 %}
+                {% endif %}
+            {% endfor %}
+            <div class="col-8">
+                <div class="row">
+                    {% for carte in joueur1.deck %}
+                        {% if tableauCards[carte].camel == false %}
+                            <div class="col-sm-2 card {{ tableauCards[carte].ressources }}"><img
+                                        src="{{ asset('img/cartes/dos.png') }}" class="image card-img-top">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% elseif joueurConnected.id == joueur1.user.id %}
+        <div class="row">
+            <p>Play user : {{ joueur2.id }}</p>
+            <p>User_id : {{ joueur2.user.login }}</p>
+            {% set camel = 0 %}
+            {% for carte in joueur2.deck %}
+                {% if tableauCards[carte].camel == true %}
+                    {% set camel = camel +1 %}
+                {% endif %}
+            {% endfor %}
+            <div class="col-8">
+                <div class="row">
+                    {% for carte in joueur2.deck %}
+                        {% if tableauCards[carte].camel == false %}
+                            <div class="col-sm-2 card {{ tableauCards[carte].ressources }}"><img
+                                        src="{{ asset('img/cartes/dos.png') }}" class="image card-img-top">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Je sais pas comment t'as fais</p>
+    {% endif %}
+    <div class="row">
+        <!--CARTE TERRAIN-->
+        {% set carteTerrainIndex = 0 %}
+
+        {% for carte in game.terrain %}
+            <div id="{{ tableauCards[carte].id }}" class="col-sm-2 card carte_terrain">
+                <img alt="{{ tableauCards[carte].ressources }}"
+                     src="{{ asset('img/cartes/'~tableauCards[carte].image) }}" class="image card-img-top">
+            </div>
+            {% set carteTerrainIndex = carteTerrainIndex +1 %}
+
+        {% endfor %}
+    </div>
+    <br>
+    {% if joueurConnected.id == joueur1.user.id %}
+        <div class="row">
+            <div class="col-4">
+                <p>Play user : {{ joueur1.id }}</p>
+                <p>User_id : {{ joueur1.user.login }}</p>
+                {% set camel = 0 %}
+                {% for carte in joueur1.deck %}
+                    {% if tableauCards[carte].camel == true %}
+                        {% set camel = camel +1 %}
+                    {% endif %}
+                {% endfor %}
+
+                <div class="col-6">
+                    <p>Enclos à mamouth :</p>
+                    <img src="{{ asset('img/cartes/mammouth.png') }}" class="image card-img-top">
+                    <p class="text-center">{{ joueur1.camel }}</p>
+
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    {% for carte in joueur1.deck %}
+                        <div id="{{ tableauCards[carte].id }}" class="col-sm-2 card carte_joueur" style="width: 18rem;">
+                            <img src="{{ asset('img/cartes/'~tableauCards[carte].image) }}"
+                                 class="card-img-top"
+                                 alt="...">
+
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% elseif joueurConnected.id == joueur2.user.id %}
+        <div class="row">
+            <div class="col-4">
+                <p>Play user : {{ joueur2.id }}</p>
+                <p>User_id : {{ joueur2.user.login }}</p>
+                {% set camel = 0 %}
+                {% for carte in joueur2.deck %}
+                    {% if tableauCards[carte].camel == true %}
+                        {% set camel = camel +1 %}
+                    {% endif %}
+                {% endfor %}
+
+                <div class="col-6">
+                    <p>Enclos à mamouth :</p>
+
+                    <img src="{{ asset('img/cartes/mammouth.png') }}" class="image card-img-top">
+                    <p class="text-center">{{ joueur2.camel }}</p>
+
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    {% for carte in joueur2.deck %}
+                        {% if tableauCards[carte].camel == false %}
+                            <div id="{{ tableauCards[carte].id }}" class="col-sm-2 card carte_joueur"
+                                 style="width: 18rem;">
+                                <img src="{{ asset('img/cartes/'~tableauCards[carte].image) }}"
+                                     class="card-img-top"
+                                     alt="...">
+
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Je sais pas comment t'as fait</p>
+    {% endif %}
+
+</div>
+<button id="prendre" type="button" class="btn btn-primary">PRENDRE CARTE</button>
+<button id="vendre" type="button" class="btn btn-primary">VENDRE CARTE</button>
+

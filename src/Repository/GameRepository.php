@@ -47,4 +47,9 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function getTerrain($id) {
+        $game = $this->find($id);
+        return $game->getTerrain();
+
+    }
 }
