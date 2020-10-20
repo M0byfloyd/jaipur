@@ -269,7 +269,8 @@ class GameController extends AbstractController
         $entityManager->flush();
 
         return $this->render('game/new.html.twig', [
-            'joueurConnected' => $this->getUser()
+            'joueurConnected' => $this->getUser(),
+            'game_id'=>$game->getId(),
         ]);
     }
 
@@ -372,7 +373,6 @@ class GameController extends AbstractController
                 $recupCarteTerrain= $game->getTerrain();
                 foreach ($recupCarteTerrain as $item) {
                     $renvoisCarteTerrain[] = $item;
-
                 }
 
                 //return $this->json($renvoisCarteTerrain);

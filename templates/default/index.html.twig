@@ -3,5 +3,23 @@
 {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
-<h1 class="text-center">Bienvenue sur le site de jeu TOUMAI !</h1>
+    <div class="row first">
+
+        <h1 class="text-center">Bienvenue dans l'univers de TOUMAI !</h1>
+        <a href="#">
+            <img src="{{ asset('img/toumain_jauni.png') }}">
+        </a>
+        <a id="button" href="{{ path('game') }}">Jouer</a>
+
+    </div>
+
+    <!--<&#45;&#45; commente les autres divs si c'est moche &ndash;&gt;-->
+    <div class="row second">
+        <h2>Comment Jouer ? </h2>
+        <div class="boxtext">
+            Dans un monde froid et hostile, votre but premier est de récupérer le maximum de ressources pour acquérir le feu
+            <a id="leftbottom" href="#">Lire les règles</a>
+            <a id="rightbottom" href="#">Lire les règles en vidéo</a>
+        </div>
+    </div>
 {% endblock %}

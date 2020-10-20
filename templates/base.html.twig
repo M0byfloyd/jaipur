@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ asset('assets/style/style.css') }}">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -13,8 +14,8 @@
 </head>
 <body>
 <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+    <nav class="row navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{{ path('default') }}">
             <img src="{{ asset('img/toumai_brun.png') }}" width="120"  class="d-inline-block align-top" alt="">
         </a>
         <a>
@@ -24,6 +25,7 @@
                 <span>{{ joueurConnected.login }}</span>
             {% endif %}
         </a>
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
                 aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,14 +33,13 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-link active" href="{{ path('game') }}">Jouer</a>
                 <a class="nav-link active" href="#">Mon profil</a>
                 {% if joueurConnected is empty %}
-                    <a class="nav-link active" href="{{ path('app_login') }}">Se conecter</a>
+                    <a class="nav-link active" href="{{ path('app_login') }}">Se connecter</a>
 
                 {% else %}
-                    <a class="nav-link active" href="{{ path('app_logout') }}">Se déconecter</a>
+                    <a class="nav-link active" href="{{ path('app_logout') }}">Se déconnecter</a>
                 {% endif %}
             </div>
         </div>
