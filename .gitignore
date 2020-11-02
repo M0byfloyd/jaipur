@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -9,6 +8,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+<<<<<<< HEAD
 
 
 ###> symfony/webpack-encore-bundle ###
@@ -17,3 +17,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+=======
+>>>>>>> 174c8e8fd5ed11d80c7d2ed73c7ce6c8a78ef84b
