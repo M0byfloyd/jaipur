@@ -28,7 +28,7 @@
         var timer;
         var timeStop = false
         $(document).ready(function () {
-            $('#plateau').hide()
+            $('#boutons').hide()
             refreshPlateau()
 
 //SELECTION
@@ -165,7 +165,7 @@
                 success: function (data) {
                     console.log(data)
                     if (data == 'monadversairejoue') {
-                        $('#plateau').hide()
+                        $('#boutons').hide()
                         if (timeStop == false) {
                             console.log('tac');
                             timer = setInterval(refreshPlateau, 2000);
