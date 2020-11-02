@@ -1,3 +1,4 @@
+
 <div class="col-4">
     <div class="row">
         <div class="row col-12">
@@ -185,6 +186,7 @@
         {% endfor %}
     </div>
     <br>
+    <!-- INTERFACES JOUEURS-->
     {% if joueurConnected.id == joueur1.user.id %}
         <div class="row">
             <div class="col-4">
@@ -214,6 +216,9 @@
 
                         </div>
                     {% endfor %}
+                </div>
+                <div class="row">
+                    <p>Vos point : {{ joueur1.points }}</p>
                 </div>
             </div>
         </div>
@@ -251,6 +256,9 @@
                         {% endif %}
                     {% endfor %}
                 </div>
+                <div class="row">
+                    <p>Vos point : {{ joueur2.points }}</p>
+                </div>
             </div>
         </div>
     {% else %}
@@ -258,6 +266,8 @@
     {% endif %}
 
 </div>
-<button id="prendre" type="button" class="btn btn-primary">PRENDRE CARTE</button>
-<button id="vendre" type="button" class="btn btn-primary">VENDRE CARTE</button>
-
+<div id="boutons" class="row justify-content-center col-12">
+    <button id="prendre" type="button" class="btn btn-primary">PRENDRE CARTE</button>
+    <button id="vendre" type="button" class="btn btn-primary">VENDRE CARTE</button>
+    <button id="echange" type="button" class="btn btn-primary">ECHANGER CARTE</button>
+</div>

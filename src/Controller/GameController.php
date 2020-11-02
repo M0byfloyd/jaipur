@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Game;
 use App\Entity\PlayUser;
 use App\Entity\Token;
+use App\Form\GameType;
 use App\Repository\CardRepository;
 use App\Repository\GameRepository;
 use App\Repository\PlayUserRepository;
@@ -14,35 +15,147 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
-
 
 /**
  * Class GameController
  * @package App\Controller
- * @Route("/game")
+ * @Route("/")
  */
 class GameController extends AbstractController
 {
+    function defJoueurActif($game)
+    {
+
+        $joueurs = $game->getGameUser();
+        if ($game->getJoueurActif() == 0 && $joueurs[0]->getUser()->getId() == $this->getUser()->getId()) {
+            $game->setJoueurActif(1);
+        } elseif ($game->getJoueurActif() == 1 && $joueurs[1]->getUser()->getId() == $this->getUser()->getId()) {
+            $game->setJoueurActif(0);
+        }
+    }
+
+    function remiseTerrain($game)
+    {
+
+        $recupCarteTerrain = $game->getTerrain();
+        foreach ($recupCarteTerrain as $item) {
+            $renvoisCarteTerrain[] = $item;
+        }
+        if (count($renvoisCarteTerrain) < 5) {
+            $pioche = $game->getPioche();
+            for ($i = 0; $i <= 5 - count($renvoisCarteTerrain); $i++) {
+                $renvoisCarteTerrain[] = array_pop($pioche);
+            }
+        }
+        $game->setPioche($pioche);
+        $game->setTerrain($renvoisCarteTerrain);
+    }
+    //CRUD
+
     /**
-     * @Route("/", name="game")
+     * @Route("admin/game", name="game_index", methods={"GET"})
      */
-    public function index(
+    public function index(GameRepository $gameRepository): Response
+    {
+        return $this->render('game/index.html.twig', [
+            'games' => $gameRepository->findAll(),
+            'joueurConnected' => $this->getUser()
+
+        ]);
+    }
+
+    /**
+     * @Route("admin/game/new", name="game_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $game = new Game();
+        $form = $this->createForm(GameType::class, $game);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($game);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('game_index');
+        }
+
+        return $this->render('game/new.html.twig', [
+            'game' => $game,
+            'form' => $form->createView(),
+            'joueurConnected' => $this->getUser()
+
+        ]);
+    }
+
+    /**
+     * @Route("admin/game/{id}", name="game_show", methods={"GET"})
+     */
+    public function show(Game $game): Response
+    {
+        return $this->render('game/show.html.twig', [
+            'game' => $game,
+            'joueurConnected' => $this->getUser()
+
+        ]);
+    }
+
+    /**
+     * @Route("admin/game/{id}/edit", name="game_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Game $game): Response
+    {
+        $form = $this->createForm(GameType::class, $game);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('game_index');
+        }
+
+        return $this->render('game/edit.html.twig', [
+            'game' => $game,
+            'form' => $form->createView(),
+            'joueurConnected' => $this->getUser()
+
+        ]);
+    }
+
+    /**
+     * @Route("admin/game/{id}", name="game_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Game $game): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $game->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($game);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('game_index');
+    }
+
+    //GERATION
+
+    /**
+     * @Route("/game", name="game")
+     */
+    public function accueil(
         PlayUserRepository $playUserRepository,
         UserInterface $user,
         GameRepository $gameRepository
     )
     {
-
-
         $partieEnCours = $gameRepository->findBy(
             ['statut' => 0],
             ['id' => 'DESC']
         );
-
-
-        return $this->render('game/index.html.twig', [
+        return $this->render('game/accueil.html.twig', [
             'controller_name' => 'GameController',
             'joueurConnected' => $this->getUser(),
             'partieEnCours' => $partieEnCours
@@ -50,7 +163,7 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/select-adversaire", name="game_select_adversaire")
+     * @Route("game/select-adversaire", name="game_select_adversaire")
      */
     public function selectAdversaire(UserRepository $userRepository)
     {
@@ -64,7 +177,7 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/show-game/{game}", name="show_game")
+     * @Route("game/show-game/{game}", name="show_game")
      * @param CardRepository $cardRepository
      * @param Game $game
      * @param GameRepository $gameRepository
@@ -113,7 +226,7 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/new-game", name="create_new_game")
+     * @Route("game/new-game", name="create_new_game")
      */
     public function newGame(
         EntityManagerInterface $entityManager,
@@ -135,8 +248,8 @@ class GameController extends AbstractController
 
         //Récupération liste chammeau
 
-        $listeChammeaux= $cardRepository->findBy(
-            ['ressources'=>'mammouth']
+        $listeChammeaux = $cardRepository->findBy(
+            ['ressources' => 'mammouth']
         );
 
 
@@ -158,6 +271,7 @@ class GameController extends AbstractController
         foreach ($tokens as $token) {
             $tableauTokens[$token->getRessource()][] = $token->getId();
         }
+
         foreach ($specialTokens as $token) {
             $tableauSpecialTokens[$token->getNbCards()][] = $token->getId();
         }
@@ -200,18 +314,34 @@ class GameController extends AbstractController
 
         //Vérification chammeaux
 
-        foreach ($listeChammeaux AS $item) {
-            $numId =array_search($item->getId(),$mainJ1);
-            if (!empty($numId)) {
-                unset($mainJ1[$numId]);
-                $playJoueur1->setCamel($playJoueur1->getCamel()+1);
+        dump($listeChammeaux);
+        dump($mainJ1);
+        // Pour chaque chamal dans chammeaux
+        foreach ($listeChammeaux as $chammal) {
+            dump('chamal id' . $chammal->getId());
+            dump(array_search($chammal->getId(), $mainJ1));
+            if (array_search($chammal->getId(), $mainJ1) != false) {
+                dump('Il faut supprimer l\'index ' . array_search($chammal->getId(), $mainJ1));
+                array_splice($mainJ1, array_search($chammal->getId(), $mainJ1), 1);
+                $playJoueur1->setCamel($playJoueur1->getCamel() + 1);
             }
-
         }
 
+
+        /*foreach ($listeChammeaux as $item) {
+            $numId = array_search($item->getId(), $mainJ1);
+            dump($numId);
+            if (!empty($numId)) {
+                array_slice($mainJ1, $numId, 1);
+                $playJoueur1->setCamel($playJoueur1->getCamel() + 1);
+            }
+        }*/
+
+        dump($mainJ1);
         //Assignation des 5 cartes au joueur 1
         $playJoueur1->setDeck($mainJ1);
 
+        dump($playJoueur1);
 
         //Ajout d'une interface pour le joueur 2
 
@@ -229,25 +359,24 @@ class GameController extends AbstractController
 
         //Vérification chammeaux
 
-        foreach ($listeChammeaux AS $item) {
-            $numId =array_search($item->getId(),$mainJ2);
-            if (!empty($numId)) {
-                unset($mainJ2[$numId]);
-                $playJoueur2->setCamel($playJoueur2->getCamel()+1);
+        foreach ($listeChammeaux as $chammal) {
+            dump('chamal id' . $chammal->getId());
+            dump(array_search($chammal->getId(), $mainJ2));
+            if (array_search($chammal->getId(), $mainJ2) != false) {
+                dump('Il faut supprimer l\'index ' . array_search($chammal->getId(), $mainJ2));
+                array_splice($mainJ2, array_search($chammal->getId(), $mainJ2), 1);
+                $playJoueur2->setCamel($playJoueur2->getCamel() + 1);
             }
-
         }
-
         //Assignation des 5 cartes au joueur 2
 
         $playJoueur2->setDeck($mainJ2);
 
+        $playJoueur1->setPoints(0);
+        $playJoueur2->setPoints(0);
+
         $terrain[] = array_pop($tableauCards);
         $terrain[] = array_pop($tableauCards);
-
-
-
-
 
 
         $game->setTerrain($terrain);
@@ -258,7 +387,7 @@ class GameController extends AbstractController
         $game->setSpecialTokens($tableauSpecialTokens);
 
         $game->setStatut(0);
-        $game->setJoueurActif(1);
+        $game->setJoueurActif(0);
 
         //Persist des données
         $entityManager->persist($game);
@@ -268,22 +397,24 @@ class GameController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->render('game/new.html.twig', [
+        return $this->render('game/newGame.html.twig', [
             'joueurConnected' => $this->getUser(),
-            'game_id'=>$game->getId(),
+            'game_id' => $game->getId(),
         ]);
     }
 
     //PARTIE
 
     /**
-     * @Route("/quijoue/{game}", name="qui_joue")
+     * @Route("game/quijoue/{game}", name="qui_joue")
      */
     public function quiJoue(Game $game)
     {
         $joueurs = $game->getGameUser();
 
         if ($game->getJoueurActif() == 0 && $joueurs[0]->getUser()->getId() == $this->getUser()->getId()) {
+            return $this->json('jejoue');
+        } elseif ($game->getJoueurActif() == 1 && $joueurs[1]->getUser()->getId() == $this->getUser()->getId()) {
             return $this->json('jejoue');
         } else {
             return $this->json('monadversairejoue');
@@ -292,7 +423,7 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/refresh-plateau/{game}", name="refresh_plateau")
+     * @Route("game/refresh-plateau/{game}", name="refresh_plateau")
      */
     public function refreshPlateau(
         CardRepository $cardRepository,
@@ -302,6 +433,50 @@ class GameController extends AbstractController
         $tableauCards = $cardRepository->findArrayById();
         $tableauTokens = $tokenRepository->findArrayById();
         $tableauSpecialToken = $specialTokenRepository->findArrayById();
+        $this->remiseTerrain($game);
+
+        function videOuNon($ressJeton)
+        {
+            $vide = 0;
+            foreach ($ressJeton as $resource) {
+                if (empty($resource)) {
+                    $vide++;
+                }
+            }
+            return $vide;
+        }
+
+        $tabJetons = $game->getTokens();
+        if (videOuNon($tabJetons) >= 3) {
+            $joueur1 = $game->getGameUser()[0];
+            $joueur2 = $game->getGameUser()[1];
+
+            if ($joueur1->getPoints() !== $joueur2->getPoints()) {
+                if ($joueur1->getPoints() > $joueur2->getPoints()) {
+                    $finResultat = $joueur1->getLogin();
+                    $joueur1->setCamel($joueur1->getCamel()+1);
+                } else {
+                    $finManche = $joueur2->getLogin();
+                    $joueur2->setCamel($joueur2->getCamel()+1);
+                }
+                $finResultat .= 'a gagné la manche !';
+            } else {
+                $finResultat = 'égalité';
+            }
+
+
+
+
+
+
+            $response = $this->forward('App\Controller\GameController::finPartie', [
+
+            ]);
+            return $this->redirectToRoute('fin_partie', [
+                'finResultat' => $finResultat
+            ]);
+
+        }
 
         return $this->render('game/plateau.html.twig', [
             'game' => $game,
@@ -316,7 +491,19 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/action/prendre/{game}", name="prendre_action")
+     * @Route("game/action/fin", name="fin_partie")
+     */
+    public function finPartie(Request $request)
+    {
+        $finResultat = $request->attributes->get('finResultat');
+
+        return $this->render('game/fin.html.twig', [
+            'resultatPartie' => $finResultat
+        ]);
+    }
+
+    /**
+     * @Route("game/action/prendre/{game}", name="prendre_action")
      */
     public function prendreAction(
         CardRepository $cardRepository,
@@ -332,82 +519,123 @@ class GameController extends AbstractController
     )
     {
         //Récupération du deck du joueur
-        $playJoueur= $playUserRepository->findPlayUser($game->getId(),$user->getId());
+        $playJoueur = $playUserRepository->findPlayUser($game->getId(), $user->getId());
         $playJoueur = $playJoueur[0];
         $tabJoueurDeck = $playJoueur->getDeck();
 
         //Récuoération carte envoyée
-        $arrayTerrain = $request->request->get('arrayTerrain');
+        $arrayTerrainRecept = $request->request->get('arrayTerrain');
+        foreach ($arrayTerrainRecept as $item) {
+            $arrayTerrain[] = intval($item);
+        }
+        foreach ($tabJoueurDeck as $item) {
+            $tabJoueurDeckId[] = $item;
+        }
+        //Liste des mammouths
+        $listeMammouths = $cardRepository->findBy(
+            ['camel' => 1]
+        );
+
+
         //return $this->json($arrayTerrain);
+        //Si le joueur a pris plus d'une carte
         if (count($arrayTerrain) > 1) {
             return $this->json('unecarteseulement');
-        }
-        else {
-            if ( count($arrayTerrain) > (7-count($tabJoueurDeck)) ) {
-                return $this->json('tropdecarte');
+        } else {
+            $tabTerrain = $game->getTerrain();
+            foreach ($listeMammouths as $chammal) {
+                $mammouthCheckId[] = $chammal->getId();
+
+                $mammouthCheck[] = array_search($chammal->getId(), $tabTerrain);
+                if (array_search($chammal->getId(), $tabTerrain) !== false) {
+                    array_splice($tabTerrain, array_search($chammal->getId(), $tabTerrain), 1);
+                    $playJoueur->setCamel($playJoueur->getCamel() + 1);
+                    $took = true;
+                    $results[] = array_search($chammal->getId(), $tabTerrain);
+
+                } else {
+                    $refuse[] = 'nope';
+                }
             }
-            else {
+            $dataMammoth = [
+
+                'mammoth check' => $mammouthCheck,
+                'tabTerrain' => $tabTerrain
+            ];
+            //return $this->json($dataMammoth);
+            if (count($arrayTerrain) > (7 - count($tabJoueurDeckId))) {
+                return $this->json('tropdecarte');
+            } else {
                 $tableauCards = $cardRepository->findArrayById();
                 $tableauTokens = $tokenRepository->findArrayById();
                 $tableauSpecialToken = $specialTokenRepository->findArrayById();
+                if (!isset($took)) {
+                    $numIndex = 0;
+                    for ($i = 0; $i < count($tabTerrain); $i++) {
+                        $numId = array_search($tabTerrain[$i], $arrayTerrain);
+                        $resultatsNumId[] = $numId;
+                        if ($numId !== false) {
+                            $tabJoueurDeck[] = $tabTerrain[$numIndex];
+                            array_splice($tabTerrain, $numIndex, 1);
+                        }
+                        $numIndex++;
+                    }
 
-
-                $tabTerrain = $gameRepository->getTerrain($game);
-
-
-                for ($i = 0; $i < count($arrayTerrain); $i++) {
-
-                    unset($tabTerrain[array_search($arrayTerrain[$i], $tabTerrain)]);
-                    $tabJoueurDeck[] = $arrayTerrain[$i];
+                    //return $this->json($data);
+                    $inArrayTests = [
+                        'true' => in_array(true, $mammouthCheck),
+                        '0' => in_array(0, $mammouthCheck),
+                        '1' => in_array(1, $mammouthCheck),
+                        '2' => in_array(2, $mammouthCheck),
+                        '3' => in_array(3, $mammouthCheck),
+                        '4' => in_array(4, $mammouthCheck),
+                        '5' => in_array(5, $mammouthCheck),
+                    ];
+                    $data = [
+                        'arrayTest' => $inArrayTests,
+                        'arrayTerrain' => $arrayTerrain,
+                        'numId' => $resultatsNumId,
+                        'tabJoueurDeckFinal' => $tabJoueurDeck,
+                        'tabTerrainFinal' => $tabTerrain
+                    ];
                 }
+
+                //return $this->json($data);
+                //return $this->json($tabJoueurDeck);
                 $playJoueur->setDeck($tabJoueurDeck);
 
 
-
                 $game->setTerrain($tabTerrain);
-                $game->setJoueurActif(0);
+
+                $this->defJoueurActif($game);
+
                 $entityManager->persist($game);
                 $entityManager->persist($playJoueur);
 
                 //Remise en place de la pioche
-                $recupCarteTerrain= $game->getTerrain();
-                foreach ($recupCarteTerrain as $item) {
-                    $renvoisCarteTerrain[] = $item;
-                }
 
                 //return $this->json($renvoisCarteTerrain);
-
-                if (count($renvoisCarteTerrain) < 5) {
-                    $pioche = $game->getPioche();
-                    for ($i =0; $i <= 5-count($renvoisCarteTerrain); $i++) {
-                        $renvoisCarteTerrain[]= array_pop($pioche);
-                    }
-
-                }
-
-        }
-            $game->setTerrain($renvoisCarteTerrain);
-            $game->setPioche($pioche);
-
-
-            $entityManager->flush();
-
-            return $this->render('game/plateau.html.twig', [
-                'game' => $game,
-                'joueur1' => $game->getGameUser()[0],
-                'joueur2' => $game->getGameUser()[1],
-                'joueurConnected'=>$this->getUser(),
-                'tableauCards' => $tableauCards,
-                'tableauTokens' => $tableauTokens,
-                'tableauSpecialToken' => $tableauSpecialToken
-            ]);
+            }
         }
 
 
+        $entityManager->flush();
 
+        return $this->render('game/plateau.html.twig', [
+            'game' => $game,
+            'joueur1' => $game->getGameUser()[0],
+            'joueur2' => $game->getGameUser()[1],
+            'joueurConnected' => $this->getUser(),
+            'tableauCards' => $tableauCards,
+            'tableauTokens' => $tableauTokens,
+            'tableauSpecialToken' => $tableauSpecialToken
+        ]);
     }
+
+    //                                  VENDRE
+
     /**
-     * @Route("/action/vendre/{game}", name="vendre_action")
+     * @Route("game/action/vendre/{game}", name="vendre_action")
      */
     public function vendreAction(
         CardRepository $cardRepository,
@@ -419,84 +647,296 @@ class GameController extends AbstractController
         Game $game,
         Request $request,
         EntityManagerInterface $entityManager
-
     )
     {
+
+        function sendData($check = "erreur", $message = "message non formaté")
+        {
+            $data = [
+                'check' => $check,
+                'message' => $message
+            ];
+            return $data;
+        }
+
         //Récupération du deck du joueur
-        $playJoueur= $playUserRepository->findPlayUser($game->getId(),$user->getId());
+        $playJoueur = $playUserRepository->findPlayUser($game->getId(), $user->getId());
         $playJoueur = $playJoueur[0];
         $tabJoueurDeck = $playJoueur->getDeck();
+
 
         //Récuoération carte envoyée
         $arrayJoueur = $request->request->get('arrayJoueur');
         //return $this->json($arrayJoueur);
 
-        for ($i =0; $i <= count($arrayJoueur)-1; $i++) {
+        for ($i = 0; $i <= count($arrayJoueur) - 1; $i++) {
 
-            $sendCard[] =$cardRepository->find($arrayJoueur[$i]);
+            $sendCard[] = $cardRepository->find($arrayJoueur[$i]);
         }
+
+        for ($i = 0; $i <= count($sendCard) - 1; $i++) {
+
+            $sendCardRessource[] = $sendCard[$i]->getRessources();
+        }
+
 
         //return $this->json($sendCardId);
         //return $this->json($sendCard);
+
+
         if (count($arrayJoueur) < 2) {
-            return $this->json('pasAssezCartesVendre');
-        }
-        else {
-            if ( count($arrayJoueur) > (9-count($tabJoueurDeck)) ) {
+            return $this->json(sendData("error", 'Il vous faut sélectionner deux carte au moins'));
+        } else {
+            /*if (count($arrayJoueur) > (9 - count($tabJoueurDeck))) {
                 return $this->json('tropdecarte');
-            }
-            else {
-                for ($i =0; $i <= count($sendCard)-1; $i++) {
+            }*/
+            if (count(array_unique($sendCardRessource)) == count($sendCardRessource)) {
+                return $this->json('memeType');
+            } else {
+                $tableauCards = $cardRepository->findArrayById();
+                $tableauTokens = $tokenRepository->findArrayById();
+                $tableauSpecialToken = $specialTokenRepository->findArrayById();
+                $tabJoueurDeck = $playJoueur->getDeck();
+                //return $this->json($sendCardRessource);
 
-                    $sendCardRessource[] = $sendCard[$i]->getRessources();
-                }
-                if (count(array_unique($sendCardRessource)) == count($sendCardRessource)) {
-                    return $this->json('memeType');
-                }
-                else {
-                    $tableauCards = $cardRepository->findArrayById();
-                    $tableauTokens = $tokenRepository->findArrayById();
-                    $tableauSpecialToken = $specialTokenRepository->findArrayById();
-                    $tabJoueurDeck = $playJoueur->getDeck();
-                    //return $this->json($sendCardRessource);
 
-                    foreach ($sendCard as $item) {
-                        $sendCardId[] = $item->getId();
+                foreach ($sendCard as $item) {
+                    $sendCardId[] = intval($item->getId());
+                }
+                foreach ($tabJoueurDeck as $item) {
+                    $tabJoueurDeckId[] = intval($item);
+                }
+                //return $this->json($tabJoueurDeckId);
+                $numIndex = 0;
+
+                for ($i = 0; $i <= count($tabJoueurDeckId); $i++) {
+                    $isTrue = array_search($tabJoueurDeckId[$i], $sendCardId);
+                    $isTrueCollec[] = $isTrue;
+                    if ($isTrue !== false) {
+                        $trueCollec[] = $isTrue;
+                        $defausse[] = $tabJoueurDeckId[$i];
+                        unset($tabJoueurDeckId[$i]);
                     }
-
-                    foreach ($sendCard as $item) {
-                        unset($tabJoueurDeck[array_search($item, $sendCard)]);
-                        $sendCard[] = $item;
-                    }
-
-                    //return $this->json($sendCardId);
-                    $playJoueur->setDeck($tabJoueurDeck);
-
-
-
-                    $game->setJoueurActif(0);
-                    $entityManager->persist($game);
-                    $entityManager->persist($playJoueur);
                 }
+                array_values($tabJoueurDeckId);
 
+                foreach ($tabJoueurDeckId as $item) {
+                    $tabJoueurDeckFinal[] = $item;
+                }
+                //return $this->json($tabJoueurDeckId);
+                //JETOOOOOONNN
 
+                $pionsRessource = $gameRepository->findTokens($game->getId(), $sendCardRessource[0]);
+
+                $dataTest = [
+                    'trueCollec' => $trueCollec,
+                    'isTrueCollec' => $isTrueCollec,
+                    'deck de base' => $playJoueur->getDeck(),
+                    'sendCard' => $sendCardId,
+                    'deck' => $tabJoueurDeckId,
+                ];
+
+                for ($iterationCount = 0; $iterationCount < count($arrayJoueur); $iterationCount++) {
+                    $der = count($pionsRessource) - 1;
+                    $pionContext = $tokenRepository->find($pionsRessource[$der]);
+                    $playJoueur->setPoints($playJoueur->getPoints() + $pionContext->getValue());
+                    unset($pionsRessource[$der]);
+                }
+                //return $this->json(sendData('error',$pionsRessource));
+                //return $this->json(sendData($gameRepository->arrayToken($game->getId(),$sendCardRessource[0],$pionsRessource)));
+
+                $game->setTokens($gameRepository->arrayToken($game->getId(), $sendCardRessource[0], $pionsRessource));
+                $playJoueur->setDeck($tabJoueurDeckFinal);
+
+                $game->setDefausse($defausse);
+
+                $this->defJoueurActif($game);
+                $entityManager->persist($game);
+                $entityManager->persist($playJoueur);
             }
 
 
-            $entityManager->flush();
-
-            return $this->render('game/plateau.html.twig', [
-                'game' => $game,
-                'joueur1' => $game->getGameUser()[0],
-                'joueur2' => $game->getGameUser()[1],
-                'joueurConnected'=>$this->getUser(),
-                'tableauCards' => $tableauCards,
-                'tableauTokens' => $tableauTokens,
-                'tableauSpecialToken' => $tableauSpecialToken
-            ]);
         }
 
 
+        $entityManager->flush();
 
+        return $this->render('game/plateau.html.twig', [
+            'game' => $game,
+            'joueur1' => $game->getGameUser()[0],
+            'joueur2' => $game->getGameUser()[1],
+            'joueurConnected' => $this->getUser(),
+            'tableauCards' => $tableauCards,
+            'tableauTokens' => $tableauTokens,
+            'tableauSpecialToken' => $tableauSpecialToken
+        ]);
     }
+
+    // ECHANGER
+
+    /**
+     * @Route("game/action/echange/{game}", name="echange_action")
+     */
+    public function echangeAction(
+        CardRepository $cardRepository,
+        PlayUserRepository $playUserRepository,
+        TokenRepository $tokenRepository,
+        SpecialTokenRepository $specialTokenRepository,
+        GameRepository $gameRepository,
+        UserInterface $user,
+        Game $game,
+        Request $request,
+        EntityManagerInterface $entityManager
+    )
+    {
+        $tableauCards = $cardRepository->findArrayById();
+        $tableauTokens = $tokenRepository->findArrayById();
+        $tableauSpecialToken = $specialTokenRepository->findArrayById();
+
+        //Récupération du deck du joueur
+        $playJoueur = $playUserRepository->findPlayUser($game->getId(), $user->getId());
+        $playJoueur = $playJoueur[0];
+        $tabJoueurDeck = $playJoueur->getDeck();
+
+        //Recup terrain
+        $tabTerrain = $game->getTerrain();
+
+        //Récuoération carte envoyée
+        $arrayJoueur = $request->request->get('arrayJoueur');
+        $arrayTerrain = $request->request->get('arrayTerrain');
+
+        $terrainDeb = $tabTerrain;
+        $joueurDeb = $tabJoueurDeck;
+        //return $this->json($arrayJoueur);
+        $cacheTabJoueurDeck = $tabJoueurDeck;
+        $cacheTabTerrain = $tabTerrain;
+
+        $tabJoueurDeckCache = $tabJoueurDeck;
+        $tabTerrainCache = $tabTerrain;
+
+        foreach ($arrayJoueur as $carteId) {
+            $indexCartePourTerrain[] = array_search($carteId, $tabJoueurDeck);
+        }
+        foreach ($arrayJoueur as $carteId) {
+            array_splice($tabJoueurDeck, array_search($carteId, $tabJoueurDeck), 1);
+        }
+        foreach ($indexCartePourTerrain as $indexCarte) {
+            $carteIdPourTerrain[] = $tabJoueurDeckCache[$indexCarte];
+            $offsetError[] = $indexCarte;
+        }
+
+        foreach ($arrayTerrain as $carteId) {
+            $indexCartePourJoueur[] = array_search($carteId, $tabTerrain);
+        }
+        foreach ($arrayTerrain as $carteId) {
+            array_splice($tabTerrain, array_search($carteId, $tabTerrain), 1);
+        }
+        foreach ($indexCartePourJoueur as $indexCarte) {
+            $carteIdPourJoueur[] = $tabTerrainCache[$indexCarte];
+            $offsetError[] = $indexCarte;
+        }
+
+        foreach ($carteIdPourJoueur as $carte) {
+            $tabJoueurDeck[] = $carte;
+        }
+
+        foreach ($carteIdPourTerrain as $carte) {
+            $tabTerrain[] = $carte;
+        }
+
+        //return $this->json($tabTerrain);
+
+        /*//Recherche des cartes
+
+        foreach ($arrayJoueur as $carte) {
+            $foundArrayJoueur[] = array_search($carte, $tabJoueurDeck);
+        }
+        foreach ($foundArrayJoueur as $carte) {
+            $cartePourTerrain[] = $tabJoueurDeck[$carte];
+        }
+
+        foreach ($arrayTerrain as $carte) {
+            $foundArrayTerrain[] = array_search($carte, $tabTerrain);
+        }
+        foreach ($foundArrayTerrain as $carte) {
+            $cartePourJoueur[] = $tabTerrain[$carte];
+        }
+
+        //Suppression
+        foreach ($foundArrayJoueur as $idCarte) {
+            array_splice($tabJoueurDeck, $idCarte,1);
+            $suprAj[] = $idCarte;
+        }
+
+        foreach ($foundArrayTerrain as $idCarte) {
+            array_splice($tabTerrain, $idCarte,1);
+            $suprAt[] = $idCarte;
+        }
+
+        $terrainApresSupp = $tabTerrain;
+        $joueurApresSupp = $tabJoueurDeck;
+
+        //Echange des carte
+        foreach ($cartePourJoueur as $carte) {
+            $tabJoueurDeck[] = $carte;
+        }
+
+        foreach ($cartePourTerrain as $carte) {
+            $tabTerrain[] = $carte;
+        }
+
+        $dataJoueur = [
+            '-données transitées-'=> [
+                'arrayTerrain'=>$arrayTerrain,
+                'arrayJoueur'=>$arrayJoueur,
+            ],
+
+            '-donnéés bdd-'=> [
+                'terrainDeb' => $terrainDeb,
+                'joueurDeb' => $joueurDeb,
+            ],
+            '-recherche-'=> [
+                'joueur'=>[
+                    'index des cartes trouvées dans le deck '=> $foundArrayJoueur,
+                    'carte supprimée du deck'=>$suprAj,
+                    'id des cartes à replacer dans le terrain'=>$cartePourTerrain,
+                ],
+                'terrain'=>[
+                    'index des cartes trouvées dans le terrain'=> $foundArrayTerrain,
+                    'carte supprimée du terrain'=>$suprAt,
+                    'id des cartes à replacer dans le deck'=>$cartePourJoueur,
+                ],
+            ],
+            '-suppression'=> [
+              'terrain app supp'=>$terrainApresSupp,
+              'deck apres supp'=>$joueurApresSupp,
+            ],
+            '-données finales-'=> [
+                'joueurFinal' => $tabJoueurDeck,
+                'terrainFinal' =>$tabTerrain
+            ]
+        ];
+        return $this->json($dataJoueur);*/
+
+        $this->defJoueurActif($game);
+        $game->setTerrain($tabTerrain);
+        $playJoueur->setDeck($tabJoueurDeck);
+
+        $entityManager->persist($game);
+        $entityManager->persist($playJoueur);
+
+
+        $entityManager->flush();
+
+        return $this->render('game/plateau.html.twig', [
+            'game' => $game,
+            'joueur1' => $game->getGameUser()[0],
+            'joueur2' => $game->getGameUser()[1],
+            'joueurConnected' => $this->getUser(),
+            'tableauCards' => $tableauCards,
+            'tableauTokens' => $tableauTokens,
+            'tableauSpecialToken' => $tableauSpecialToken
+        ]);
+    }
+
 }

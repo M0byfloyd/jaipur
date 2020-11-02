@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Game{% endblock %}
+
+{% block body %}
+    <h1>Game</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ game.id }}</td>
+            </tr>
+            <tr>
+                <th>Tokens</th>
+                <td>{{ game.tokens ? game.tokens|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Partie_score_final</th>
+                <td>{{ game.partieScoreFinal ? game.partieScoreFinal|join(', ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Defausse</th>
+                <td>{{ game.defausse ? game.defausse|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ game.statut ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Terrain</th>
+                <td>{{ game.terrain ? game.terrain|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>SpecialTokens</th>
+                <td>{{ game.specialTokens ? game.specialTokens|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>JoueurActif</th>
+                <td>{{ game.joueurActif }}</td>
+            </tr>
+            <tr>
+                <th>Pioche</th>
+                <td>{{ game.pioche ? game.pioche|json_encode : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('game_index') }}">back to list</a>
+
+    <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
+
+    {{ include('game/_delete_form.html.twig') }}
+{% endblock %}

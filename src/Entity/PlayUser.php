@@ -40,6 +40,11 @@ class PlayUser
      */
     private $camel;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $points;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +94,18 @@ class PlayUser
     public function setCamel(int $camel): self
     {
         $this->camel = $camel;
+
+        return $this;
+    }
+
+    public function getPoints(): ?int
+    {
+        return $this->points;
+    }
+
+    public function setPoints(int $points): self
+    {
+        $this->points = $points;
 
         return $this;
     }

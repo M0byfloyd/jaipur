@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+
+<div>
+    <a href="{{ path('card_index') }}">Accéder aux cartes</a>
+    <a href="{{ path('user_index') }}">Accéder aux utilisateurs</a>
+    <a href="{{ path('game_index') }} ">Accéder aux parties</a>
+</div>
+{% endblock %}

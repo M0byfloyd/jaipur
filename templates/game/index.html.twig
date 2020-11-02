@@ -1,29 +1,49 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello GameController!{% endblock %}
+{% block title %}Game index{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <h1>Game index</h1>
 
-<div class="row col-12 justify-content-center" >
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Tokens</th>
+                <th>Partie_score_final</th>
+                <th>Defausse</th>
+                <th>Statut</th>
+                <th>Terrain</th>
+                <th>SpecialTokens</th>
+                <th>JoueurActif</th>
+                <th>Pioche</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for game in games %}
+            <tr>
+                <td>{{ game.id }}</td>
+                <td>{{ game.tokens ? game.tokens|json_encode : '' }}</td>
+                <td>{{ game.partieScoreFinal ? game.partieScoreFinal|join(', ') : '' }}</td>
+                <td>{{ game.defausse ? game.defausse|json_encode : '' }}</td>
+                <td>{{ game.statut ? 'Yes' : 'No' }}</td>
+                <td>{{ game.terrain ? game.terrain|json_encode : '' }}</td>
+                <td>{{ game.specialTokens ? game.specialTokens|json_encode : '' }}</td>
+                <td>{{ game.joueurActif }}</td>
+                <td>{{ game.pioche ? game.pioche|json_encode : '' }}</td>
+                <td>
+                    <a href="{{ path('game_show', {'id': game.id}) }}">show</a>
+                    <a href="{{ path('game_edit', {'id': game.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    <a href="{{ path("game_select_adversaire") }}">Commencer une partie</a>
-    <div class="row col-12 justify-content-center">
-        <p class="text-center">OU</p>
-    </div>
-    <div>
-        <p class="text-center">Vos parties déjà en cours  :</p>
-    </div>
-
-    <div class="row col-12">
-    {% for partie in partieEnCours %}
-        <div class="row col-12 justify-content-center">
-        <a class="text-center" href="{{ path('show_game',{'game' : partie.id}) }}">Partie n°{{ partie.id }}</a>
-        </div>
-    {% endfor %}
-    </div>
-</div>
+    <a href="{{ path('game_new') }}">Create new</a>
 {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Partie créée</h1>
+    <p>Y accéder : <a href="{{ path('show_game', {game :  game_id })}}">Partie n° {{ game_id }}</a></p>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}

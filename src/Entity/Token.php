@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Token
 {
-    public const RESSOURCE= ['viande', 'baies', 'peinture', 'outils', 'collier', 'fourrure'];
+    public const RESSOURCE= ['viande', 'baie', 'peinture', 'outil', 'collier', 'fourrure'];
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

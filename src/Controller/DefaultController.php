@@ -14,8 +14,19 @@ class DefaultController extends AbstractController
     {
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',
-            'joueurConnected'=>$this->getUser(),
+            'joueurConnected' => $this->getUser(),
 
         ]);
+    }
+
+    /**
+     * @Route("/admin", name="admin_index")
+     */
+    public function admin()
+    {
+        return $this->render('admin/index.html.twig', [
+                'joueurConnected' => $this->getUser(),
+            ]
+        );
     }
 }

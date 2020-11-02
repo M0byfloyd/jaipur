@@ -3,9 +3,96 @@
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:bugfix" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:bugfix" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/styles/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/assets.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/prod/webpack_encore.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/test/webpack_encore.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/packages/webpack_encore.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/build.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/img/flamme2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sarabande.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/CardController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/UserController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/CardType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/GameType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Form/UserType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/card/_delete_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/card/_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/card/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/card/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/card/new.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/card/show.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/_delete_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/accueil.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/fin.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/newGame.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/game/show.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/_delete_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/_form.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/index.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/new.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/user/show.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sarabande.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sarabande.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/.htaccess" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/style/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/style/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/PlayUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Token.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Token.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/GameRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GameRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/plateau.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/plateau.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/showGame.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/showGame.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +108,7 @@
       <list>
         <option value="JavaScript File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -109,6 +197,7 @@
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/monolog-bridge" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/validator" />
       <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-idn" />
@@ -117,8 +206,6 @@
       <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
       <path value="$PROJECT_DIR$/vendor/symfony/mailgun-mailer" />
       <path value="$PROJECT_DIR$/vendor/symfony/google-mailer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/webpack-encore-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hzVr7mg6QkrYCR0A8jUFfmO0ZO" />
@@ -127,6 +214,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
@@ -211,11 +299,34 @@
       <workItem from="1602850847947" duration="1289000" />
       <workItem from="1603110378080" duration="297000" />
       <workItem from="1603173910236" duration="634000" />
+      <workItem from="1604146934416" duration="643000" />
+      <workItem from="1604149124938" duration="9084000" />
+      <workItem from="1604164540396" duration="4762000" />
+      <workItem from="1604181137970" duration="334000" />
+      <workItem from="1604191412905" duration="781000" />
+      <workItem from="1604253792086" duration="243000" />
+      <workItem from="1604254579865" duration="2571000" />
+      <workItem from="1604259815861" duration="10307000" />
+      <workItem from="1604306532078" duration="2856000" />
+      <workItem from="1604315865572" duration="602000" />
+      <workItem from="1604324474679" duration="6083000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="165" key="#Plugins" timestamp="1601976317449">
@@ -235,6 +346,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="837" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601483917286" />
+    <state x="1053" y="100" width="774" height="857" key="DiffContextDialog" timestamp="1604150596887">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1053" y="100" width="774" height="857" key="DiffContextDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150596887" />
     <state x="304" y="412" key="Github.CreateGistDialog" timestamp="1601019735473">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -255,6 +370,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="1877" height="285" key="GridCell.Tab.0.right/0.0.1920.1050/-1920.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1601853750232" />
+    <state x="1020" y="271" key="IDE.errors.dialog" timestamp="1604150221486">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="1020" y="271" key="IDE.errors.dialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150221486" />
     <state x="1222" y="251" key="NewPhpClassDialog" timestamp="1601537316518">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -273,13 +392,16 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="498" height="444" key="SwitcherDM/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1602001580044" />
-    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1601018960928">
+    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1604150596887">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150596887" />
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018960928" />
-    <state x="93" y="100" width="774" height="857" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1602684717223">
+    <state x="128" y="178" width="1620" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604266684341">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
+    <state x="478" y="178" width="774" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150253521" />
+    <state x="128" y="178" width="1620" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1604266684341" />
     <state x="93" y="100" width="774" height="857" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1602684717223" />
     <state x="1257" y="442" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601899306288">
       <screen x="0" y="0" width="1920" height="1050" />

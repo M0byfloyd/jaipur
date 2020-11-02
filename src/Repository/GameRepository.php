@@ -52,4 +52,17 @@ class GameRepository extends ServiceEntityRepository
         return $game->getTerrain();
 
     }
+    public function findTokens($id,$ressource) {
+        $game = $this->find($id);
+        $allTokens = $game->getTokens();
+        $ressourceTokens = $allTokens[$ressource];
+        return $ressourceTokens;
+    }
+    public function arrayToken($id, $ressource, $data) {
+        $game = $this->find($id);
+        $allTokens = $game->getTokens();
+        $ressourceTokens = $data;
+        $allTokens[$ressource] = $ressourceTokens;
+        return $allTokens;
+    }
 }

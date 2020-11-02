@@ -23,6 +23,11 @@
                 <span>Non connecté</span>
             {% else %}
                 <span>{{ joueurConnected.login }}</span>
+                {% for role in joueurConnected.roles %}
+                    {% if role =='ROLE_ADMIN' %}
+                        <a href="{{ path('admin_index') }}">Accéder au back-office</a>
+                    {% endif %}
+                {% endfor %}
             {% endif %}
         </a>
 
@@ -55,6 +60,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
+    {{ encore_entry_script_tags('app') }}
 {% block javascripts %}
 
 {% endblock %}

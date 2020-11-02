@@ -6,13 +6,18 @@
 
 {% block body %}
 
-    <div class="row" id="plateau" style="background: url('{{  asset('assets/img/fond_du_feu.png') }}'); background-size: cover;">
+    <div class="row" id="plateau"
+         style="background: url('{{ asset('assets/img/fond_du_feu.png') }}'); background-size: cover;">
         {{ include('game/plateau.html.twig') }}
     </div>
 {% endblock %}
 
 {% block javascripts %}
-
+    <style>
+        .selectedCard {
+            border: red solid 3px;
+        }
+    </style>
     <script>
         function selection() {
             $(this).css('border', '3px solid red')
@@ -23,22 +28,23 @@
         var timer;
         var timeStop = false
         $(document).ready(function () {
+            $('#plateau').hide()
             refreshPlateau()
 
-
+//SELECTION
             $(document).on('click', '.carte_terrain', function () {
                 var id = $(this).attr("id");
                 if (arrayTerrain.indexOf(id) == -1) {
                     if (arrayTerrain.length == 5) {
                         console.log('Vous ne pouvez pas séléctionenr plus de cinq cartes wsh')
-                        $(this).css('border', 'none')
+                        $(this).removeClass("selectedCard")
 
                     } else {
                         arrayTerrain.push(
                             id
                         )
                         console.log("Ajout de " + id)
-                        $(this).css('border', '3px solid red')
+                        $(this).addClass("selectedCard")
 
                     }
 
@@ -46,34 +52,32 @@
                 } else {
                     console.log(arrayTerrain.indexOf(id))
                     console.log("Retrait de " + id)
-                    $(this).css('border', 'none')
+                    $(this).removeClass("selectedCard")
                     arrayTerrain.splice(0, id)
                     console.log(arrayTerrain.indexOf(id))
                 }
                 console.log("Tableau actuel: " + arrayTerrain)
             });
 
+//SELECTION
             $(document).on('click', '.carte_joueur', function () {
                 var id = $(this).attr("id");
                 if (arrayJoueur.indexOf(id) == -1) {
                     if (arrayJoueur.length == 5) {
                         console.log('Vous ne pouvez pas séléctionenr plus de cinq cartes wsh')
-                        $(this).css('border', 'none')
+                        $(this).removeClass("selectedCard")
 
                     } else {
                         arrayJoueur.push(
                             id
                         )
                         console.log("Ajout de " + id)
-                        $(this).css('border', '3px solid red')
-
+                        $(this).addClass("selectedCard")
                     }
-
-
                 } else {
                     console.log(arrayJoueur.indexOf(id))
                     console.log("Retrait de " + id)
-                    $(this).css('border', 'none')
+                    $(this).removeClass("selectedCard")
                     arrayJoueur.splice(0, id)
                     console.log(arrayJoueur.indexOf(id))
                 }
@@ -91,43 +95,22 @@
                 method: 'POST',
                 success: function (data) {
                     console.log(data)
-                     if ( data =='tropdecarte') {
+                    if (data == 'tropdecarte') {
                         alert('Vous ne pouvez pas posséder plus de 7 cartes')
-                    }else if(data == 'unecarteseulement') {
-                         alert('Vous ne pouvez prendre quune carte');
-                     } else {
-                        $('#plateau').empty().load("{{ path('refresh_plateau', {game:game.id}) }}")
-                        $('#plateau').show()
-                        clearInterval(timer)
+                    } else if (data == 'unecarteseulement') {
+                        alert('Vous ne pouvez prendre quune carte');
+                    } else {
+                        console.log('prendu')
+                        refreshPlateau();
+                        arrayJoueur = [];
+                        arrayTerrain = [];
                         timeStop = false
                     }
                 }
             })
         })
 
-        function refreshPlateau() {
-            console.log('tic')
-            $.ajax({
-                url: "{{ path('qui_joue', {game: game.id}) }}",
-                //data:,
-                method: 'POST',
-                success: function (data) {
-                    console.log(data)
-                    if (data == 'monadversairejoue') {
-                        //$('#plateau').hide()
-                        if (timeStop == true) {
-                            timer = setInterval(refreshPlateau, 200);
-                        }
-                    } else {
-                        $('#plateau').empty().load("{{ path('refresh_plateau', {game:game.id}) }}")
-                        $('#plateau').show()
-                        clearInterval(timer)
-                        timeStop = false
-                    }
-                }
-            })
 
-        }
         //VENDRE
         $(document).on("click", '#vendre', function () {
             console.log('Vendaison')
@@ -137,18 +120,36 @@
                 method: 'POST',
                 success: function (data) {
                     console.log(data)
-                    if ( data =='pasAssezCartesVendre') {
-                        alert('Vous devez au moins séléctionner deux cartes')
-                    }else if(data == 'unecarteseulement') {
-                        alert('Vous ne pouvez prendre quune carte');
-                    }else if (data == 'memeType') {
-                        alert('VOUS DEVEZ AVOIR LES MEME TYPE')
-                    }
 
-                    else {
-                        $('#plateau').empty().load("{{ path('refresh_plateau', {game:game.id}) }}")
-                        $('#plateau').show()
-                        clearInterval(timer)
+                    if (data.check == "error") {
+                        alert(data.message)
+                    } else {
+                        console.log('prendu')
+                        refreshPlateau();
+                        arrayJoueur = [];
+                        arrayTerrain = [];
+                        timeStop = false
+                    }
+                }
+            })
+        })
+        //ECHANGER
+        $(document).on("click", '#echange', function () {
+            console.log('echangeation')
+            $.ajax({
+                url: "{{ path('echange_action', {game: game.id}) }}",
+                data: {arrayJoueur: arrayJoueur, arrayTerrain: arrayTerrain},
+                method: 'POST',
+                success: function (data) {
+                    console.log(data)
+
+                    if (data.check == "error") {
+                        alert(data.message)
+                    } else {
+                        console.log('prendu')
+                        refreshPlateau();
+                        arrayJoueur = [];
+                        arrayTerrain = [];
                         timeStop = false
                     }
                 }
@@ -156,7 +157,7 @@
         })
 
         function refreshPlateau() {
-            console.log('tic')
+            console.log('refreshplateau')
             $.ajax({
                 url: "{{ path('qui_joue', {game: game.id}) }}",
                 //data:,
@@ -164,19 +165,20 @@
                 success: function (data) {
                     console.log(data)
                     if (data == 'monadversairejoue') {
-                        //$('#plateau').hide()
-                        if (timeStop == true) {
-                            timer = setInterval(refreshPlateau, 200);
+                        $('#plateau').hide()
+                        if (timeStop == false) {
+                            console.log('tac');
+                            timer = setInterval(refreshPlateau, 2000);
+                            timeStop = true;
                         }
                     } else {
                         $('#plateau').empty().load("{{ path('refresh_plateau', {game:game.id}) }}")
                         $('#plateau').show()
                         clearInterval(timer)
-                        timeStop = false
+                        timeStop = true
                     }
                 }
             })
-
         }
     </script>
 

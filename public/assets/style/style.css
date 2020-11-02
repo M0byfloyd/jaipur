@@ -1,24 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat+Brush&display=swap%27%27');
-
+@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css');
 body {
     background-color: lightgray;
-    background-image: url("/img/fond.png");
+    margin: 0;
+    padding: 0;
 
 }
 .text-center{
     text-align: center;
 }
 .navbar{
-    background-image: url("../img/Rectangle1.png");
+    background-image: url("../../img/Rectangle1.png");
     color:#c4b9b1;
 }
 h1{
     color:#c4b9b1;
     font-family: 'Caveat Brush', cursive;
 }
+h2{
+    color:#c4b9b1;
+    font-family: 'Caveat Brush', cursive;
+}
 .first{
-    height: 100vh;
+    height: 90vh;
+    background-image: url("../../img/fond.png");
     background-size: cover;
+    background-repeat: no-repeat;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -29,7 +36,6 @@ h1{
 #button{
     margin-left: auto;
     margin-right: auto;
-
     font-size: 25px;
     color: white;
     font-family: 'Caveat Brush', cursive;
@@ -39,8 +45,71 @@ h1{
     box-shadow: 1px 1px 2px black;
 }
 .second{
+    height: 70vh;
+    background-image: url("../../img/flamme2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.box{
+    text-align: center;
+    background-color: rgba(234, 231, 228, 0.30);
+    width:40vh;
+    height: 30vh;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+
+
 
 }
-footer{
+.box p{
+    flex-grow: 3;
+    margin: 8vh 2vh;
+}
+#règleslinks{
+    display: inline-block;
+    width: 100%;
+    margin: 5%;
+}
+#règleslinks a{
+    text-decoration: none;
+    color: white;
+}
+#leftbottom{
+    float: left;
+    margin: auto;
+}
+#rightbottom{
+    float: right;
+    margin: auto;
 
+}
+.pied img{
+    height: 10vh;
+
+}
+form{
+    text-align: center;
+    width: 30%;
+    margin: auto;
+}
+.container-fluid{
+    background-image: url("../../img/flamme2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position:center;
+    margin-left:0;
+    padding-left: 50px;
+    height: 100vh;
+}
+#titleinscri, #titleconnect{
+    text-align: center;
+    margin-top:20vh;
 }
