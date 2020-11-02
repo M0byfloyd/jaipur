@@ -35,8 +35,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/PlayUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/assets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/webpack_encore.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,15 +175,15 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\apps\projet_symfony\sarabande\public\asset\img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\apps\projet_symfony\sarabande\public\img" />
       <recent name="F:\apps\projet_symfony\sarabande\public\assets\img" />
       <recent name="F:\apps\projet_symfony\sarabande\public\asset" />
       <recent name="F:\apps\projet_symfony\sarabande\assets" />
       <recent name="F:\apps\projet_symfony\sarabande\public\img\jetons" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\apps\projet_symfony\sarabande\public\asset\img" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -253,7 +256,7 @@
       <workItem from="1604259815861" duration="10307000" />
       <workItem from="1604306532078" duration="2856000" />
       <workItem from="1604315865572" duration="602000" />
-      <workItem from="1604324474679" duration="10222000" />
+      <workItem from="1604324474679" duration="13051000" />
     </task>
     <servers />
   </component>
