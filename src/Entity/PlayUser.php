@@ -45,6 +45,11 @@ class PlayUser
      */
     private $points;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $mancheWin;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -106,6 +111,18 @@ class PlayUser
     public function setPoints(int $points): self
     {
         $this->points = $points;
+
+        return $this;
+    }
+
+    public function getMancheWin(): ?int
+    {
+        return $this->mancheWin;
+    }
+
+    public function setMancheWin(int $mancheWin): self
+    {
+        $this->mancheWin = $mancheWin;
 
         return $this;
     }
