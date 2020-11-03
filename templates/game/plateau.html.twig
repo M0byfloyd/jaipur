@@ -139,8 +139,8 @@
                 <div class="row">
                     {% for carte in joueur1.deck %}
                         {% if tableauCards[carte].camel == false %}
-                            <div class="col-sm-2 card {{ tableauCards[carte].ressources }}"><img
-                                        src="{{ asset('img/cartes/dos.png') }}" class="image card-img-top">
+                            <div class="col-sm-2 {{ tableauCards[carte].ressources }}">
+                                <img src="{{ asset('img/cartes/dos.png') }}" class="image card-img-top">
                             </div>
                         {% endif %}
                     {% endfor %}
@@ -177,7 +177,7 @@
         {% set carteTerrainIndex = 0 %}
 
         {% for carte in game.terrain %}
-            <div id="{{ tableauCards[carte].id }}" class="col-sm-2 card carte_terrain">
+            <div id="{{ tableauCards[carte].id }}" class="col-sm-2 carte_terrain">
                 <img alt="{{ tableauCards[carte].ressources }}"
                      src="{{ asset('img/cartes/'~tableauCards[carte].image) }}" class="image card-img-top">
             </div>
@@ -209,7 +209,7 @@
             <div class="col-8">
                 <div class="row">
                     {% for carte in joueur1.deck %}
-                        <div id="{{ tableauCards[carte].id }}" class="col-sm-2 card carte_joueur" style="width: 18rem;">
+                        <div id="{{ tableauCards[carte].id }}" class="col-sm-2 carte_joueur" style="width: 18rem;">
                             <img src="{{ asset('img/cartes/'~tableauCards[carte].image) }}"
                                  class="card-img-top"
                                  alt="...">
@@ -246,12 +246,11 @@
                 <div class="row">
                     {% for carte in joueur2.deck %}
                         {% if tableauCards[carte].camel == false %}
-                            <div id="{{ tableauCards[carte].id }}" class="col-sm-2 card carte_joueur"
+                            <div id="{{ tableauCards[carte].id }}" class="col-sm-2 carte_joueur"
                                  style="width: 18rem;">
                                 <img src="{{ asset('img/cartes/'~tableauCards[carte].image) }}"
-                                     class="card-img-top"
+                                     class="image card-img-top"
                                      alt="...">
-
                             </div>
                         {% endif %}
                     {% endfor %}

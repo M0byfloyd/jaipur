@@ -14,13 +14,29 @@
 
 {% block javascripts %}
     <style>
-        .selectedCard {
+        .selectedCardTerrain {
+            border: red solid 3px;
+        }
+        .selectedCardDeck {
             border: red solid 3px;
         }
     </style>
     <script>
         function selection() {
             $(this).css('border', '3px solid red')
+        }
+        function checkError(data,action) {
+            if (data.check == "error") {
+                alert(data.message)
+                $(".selectedCardTerrain").removeClass("selectedCardTerrain")
+                $(".selectedCardDeck").removeClass("selectedCardDeck")
+            } else {
+                console.log(action)
+                refreshPlateau();
+                arrayJoueur = [];
+                arrayTerrain = [];
+                timeStop = false
+            }
         }
 
         var arrayTerrain = [];
@@ -36,23 +52,20 @@
                 var id = $(this).attr("id");
                 if (arrayTerrain.indexOf(id) == -1) {
                     if (arrayTerrain.length == 5) {
-                        console.log('Vous ne pouvez pas séléctionenr plus de cinq cartes wsh')
-                        $(this).removeClass("selectedCard")
+                        alert('Vous ne pouvez pas sélectionner plus de cinq cartes')
+                        $(this).removeClass("selectedCardTerrain")
 
                     } else {
                         arrayTerrain.push(
                             id
                         )
                         console.log("Ajout de " + id)
-                        $(this).addClass("selectedCard")
-
+                        $(this).addClass("selectedCardTerrain")
                     }
-
-
                 } else {
                     console.log(arrayTerrain.indexOf(id))
                     console.log("Retrait de " + id)
-                    $(this).removeClass("selectedCard")
+                    $(".selectedCardTerrain").removeClass("selectedCardTerrain")
                     arrayTerrain.splice(0, id)
                     console.log(arrayTerrain.indexOf(id))
                 }
@@ -64,20 +77,20 @@
                 var id = $(this).attr("id");
                 if (arrayJoueur.indexOf(id) == -1) {
                     if (arrayJoueur.length == 5) {
-                        console.log('Vous ne pouvez pas séléctionenr plus de cinq cartes wsh')
-                        $(this).removeClass("selectedCard")
+                        alert('Vous ne pouvez pas sélectionner plus de cinq cartes')
+                        $(this).removeClass("selectedCardDeck")
 
                     } else {
                         arrayJoueur.push(
                             id
                         )
                         console.log("Ajout de " + id)
-                        $(this).addClass("selectedCard")
+                        $(this).addClass("selectedCardDeck")
                     }
                 } else {
                     console.log(arrayJoueur.indexOf(id))
                     console.log("Retrait de " + id)
-                    $(this).removeClass("selectedCard")
+                    $(".selectedCardDeck").removeClass("selectedCardDeck")
                     arrayJoueur.splice(0, id)
                     console.log(arrayJoueur.indexOf(id))
                 }
@@ -88,24 +101,13 @@
 
         //PRENDRE
         $(document).on("click", '#prendre', function () {
-            console.log('prendre')
+            console.log('Prendre')
             $.ajax({
                 url: "{{ path('prendre_action', {game: game.id}) }}",
                 data: {arrayTerrain: arrayTerrain},
                 method: 'POST',
                 success: function (data) {
-                    console.log(data)
-                    if (data == 'tropdecarte') {
-                        alert('Vous ne pouvez pas posséder plus de 7 cartes')
-                    } else if (data == 'unecarteseulement') {
-                        alert('Vous ne pouvez prendre quune carte');
-                    } else {
-                        console.log('prendu')
-                        refreshPlateau();
-                        arrayJoueur = [];
-                        arrayTerrain = [];
-                        timeStop = false
-                    }
+                    checkError(data,'prendre ok')
                 }
             })
         })
@@ -120,16 +122,7 @@
                 method: 'POST',
                 success: function (data) {
                     console.log(data)
-
-                    if (data.check == "error") {
-                        alert(data.message)
-                    } else {
-                        console.log('prendu')
-                        refreshPlateau();
-                        arrayJoueur = [];
-                        arrayTerrain = [];
-                        timeStop = false
-                    }
+                    checkError(data,'vendre ok')
                 }
             })
         })

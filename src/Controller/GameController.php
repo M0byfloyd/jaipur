@@ -26,8 +26,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class GameController extends AbstractController
 {
-    function recupereDonnees() {
-
+    function sendData($check = "erreur", $message = "message non formaté")
+    {
+        $data = [
+            'check' => $check,
+            'message' => $message
+        ];
+        return $data;
     }
     function defJoueurActif($game)
     {
@@ -327,17 +332,6 @@ class GameController extends AbstractController
             }
         }
 
-
-        /*foreach ($listeChammeaux as $item) {
-            $numId = array_search($item->getId(), $mainJ1);
-            dump($numId);
-            if (!empty($numId)) {
-                array_slice($mainJ1, $numId, 1);
-                $playJoueur1->setCamel($playJoueur1->getCamel() + 1);
-            }
-        }*/
-
-        dump($mainJ1);
         //Assignation des 5 cartes au joueur 1
         $playJoueur1->setDeck($mainJ1);
 
@@ -457,8 +451,10 @@ class GameController extends AbstractController
             if ($joueur1->getPoints() !== $joueur2->getPoints()) {
                 if ($joueur1->getPoints() > $joueur2->getPoints()) {
                     $joueur1->setMancheWin($joueur1->getManche()+1);
+                    $gagnant = $joueur1->getUser()->getLogin();
                 } else {
                     $joueur2->setMancheWin($joueur2->getMancheWin()+1);
+                    $gagnant = $joueur2->getUser()->getLogin();
                 }
             } else {
                 $finManche = 'égalité';
@@ -594,10 +590,8 @@ class GameController extends AbstractController
 
 
             $entityManager->flush();
+                return $this->json($gagnant);
 
-            $response = $this->forward('App\Controller\GameController::finPartie', [
-
-            ]);
 
         }
 
@@ -665,7 +659,7 @@ class GameController extends AbstractController
         //return $this->json($arrayTerrain);
         //Si le joueur a pris plus d'une carte
         if (count($arrayTerrain) > 1) {
-            return $this->json('unecarteseulement');
+            return $this->json($this->sendData("error", 'Vous ne pouvez prendre qu\'une seule carte'));
         } else {
             $tabTerrain = $game->getTerrain();
             foreach ($listeMammouths as $chammal) {
@@ -683,13 +677,12 @@ class GameController extends AbstractController
                 }
             }
             $dataMammoth = [
-
                 'mammoth check' => $mammouthCheck,
                 'tabTerrain' => $tabTerrain
             ];
             //return $this->json($dataMammoth);
             if (count($arrayTerrain) > (7 - count($tabJoueurDeckId))) {
-                return $this->json('tropdecarte');
+                return $this->json($this->sendData("error", 'Vous ne pouvez pas posséder plus de 7 cartes'));
             } else {
                 $tableauCards = $cardRepository->findArrayById();
                 $tableauTokens = $tokenRepository->findArrayById();
@@ -774,16 +767,6 @@ class GameController extends AbstractController
         EntityManagerInterface $entityManager
     )
     {
-
-        function sendData($check = "erreur", $message = "message non formaté")
-        {
-            $data = [
-                'check' => $check,
-                'message' => $message
-            ];
-            return $data;
-        }
-
         //Récupération du deck du joueur
         $playJoueur = $playUserRepository->findPlayUser($game->getId(), $user->getId());
         $playJoueur = $playJoueur[0];
@@ -795,35 +778,30 @@ class GameController extends AbstractController
         //return $this->json($arrayJoueur);
 
         for ($i = 0; $i <= count($arrayJoueur) - 1; $i++) {
-
             $sendCard[] = $cardRepository->find($arrayJoueur[$i]);
         }
 
         for ($i = 0; $i <= count($sendCard) - 1; $i++) {
-
             $sendCardRessource[] = $sendCard[$i]->getRessources();
         }
-
 
         //return $this->json($sendCardId);
         //return $this->json($sendCard);
 
-
         if (count($arrayJoueur) < 2) {
-            return $this->json(sendData("error", 'Il vous faut sélectionner deux carte au moins'));
+            return $this->json($this->sendData("error", 'Il vous faut sélectionner deux carte au moins'));
         } else {
             /*if (count($arrayJoueur) > (9 - count($tabJoueurDeck))) {
                 return $this->json('tropdecarte');
             }*/
             if (count(array_unique($sendCardRessource)) == count($sendCardRessource)) {
-                return $this->json('memeType');
+                return $this->json($this->sendData("error",'Les cartes doivent être du même type'));
             } else {
                 $tableauCards = $cardRepository->findArrayById();
                 $tableauTokens = $tokenRepository->findArrayById();
                 $tableauSpecialToken = $specialTokenRepository->findArrayById();
                 $tabJoueurDeck = $playJoueur->getDeck();
                 //return $this->json($sendCardRessource);
-
 
                 foreach ($sendCard as $item) {
                     $sendCardId[] = intval($item->getId());
@@ -879,11 +857,7 @@ class GameController extends AbstractController
                 $entityManager->persist($game);
                 $entityManager->persist($playJoueur);
             }
-
-
         }
-
-
         $entityManager->flush();
 
         return $this->render('game/plateau.html.twig', [
