@@ -34,10 +34,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Form/ResetPasswordUserRequestFormType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/reset_password/byuser.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sarabande.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sarabande.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game/plateau.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/plateau.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game/showGame.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/showGame.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/GameRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GameRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,6 +162,11 @@
       <path value="$PROJECT_DIR$/vendor/symfony/twig-bridge" />
       <path value="$PROJECT_DIR$/vendor/symfonycasts/verify-email-bundle" />
       <path value="$PROJECT_DIR$/vendor/egulias/email-validator" />
+      <path value="$PROJECT_DIR$/vendor/symfony/translation" />
+      <path value="$PROJECT_DIR$/vendor/symfony/uid" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-uuid" />
+      <path value="$PROJECT_DIR$/vendor/easycorp/easyadmin-bundle" />
+      <path value="$PROJECT_DIR$/vendor/symfonycasts/reset-password-bundle" />
     </include_path>
   </component>
   <component name="ProjectId" id="1hzVr7mg6QkrYCR0A8jUFfmO0ZO" />
@@ -255,7 +271,10 @@
       <workItem from="1604306532078" duration="2856000" />
       <workItem from="1604315865572" duration="602000" />
       <workItem from="1604324474679" duration="29691000" />
-      <workItem from="1604393148453" duration="4967000" />
+      <workItem from="1604393148453" duration="6666000" />
+      <workItem from="1604401809326" duration="1380000" />
+      <workItem from="1604437026301" duration="8339000" />
+      <workItem from="1604474241598" duration="14777000" />
     </task>
     <servers />
   </component>
@@ -296,6 +315,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="837" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601483917286" />
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1604440183368">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="690" y="279" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1604440183368" />
     <state x="1053" y="100" width="774" height="857" key="DiffContextDialog" timestamp="1604150596887">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -324,10 +347,11 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1020" y="271" key="IDE.errors.dialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150221486" />
-    <state x="1222" y="251" key="NewPhpClassDialog" timestamp="1601537316518">
+    <state x="1222" y="251" key="NewPhpClassDialog" timestamp="1604481671063">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1222" y="251" key="NewPhpClassDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1601537316518" />
+    <state x="1222" y="251" key="NewPhpClassDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1604481671063" />
     <state x="1222" y="251" key="NewPhpClassDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601481750549" />
     <state x="1274" y="451" key="NewPhpFileDialog" timestamp="1601364034219">
       <screen x="0" y="0" width="1920" height="1050" />
@@ -342,11 +366,11 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="498" height="444" key="SwitcherDM/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1602001580044" />
-    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1604389911596">
+    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1604441284340">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150596887" />
-    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1604389911596" />
+    <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1604441284340" />
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018960928" />
     <state x="128" y="178" width="1620" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604388476139">
       <screen x="0" y="0" width="1920" height="1050" />

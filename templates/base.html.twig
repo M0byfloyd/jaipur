@@ -23,11 +23,6 @@
                 <span>Non connecté</span>
             {% else %}
                 <span>{{ joueurConnected.login }}</span>
-                {% for role in joueurConnected.roles %}
-                    {% if role =='ROLE_ADMIN' %}
-                        <a href="{{ path('admin_index') }}">Accéder au back-office</a>
-                    {% endif %}
-                {% endfor %}
             {% endif %}
         </a>
 
@@ -39,11 +34,19 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 <a class="nav-link active" href="{{ path('game') }}">Jouer</a>
-                <a class="nav-link active" href="#">Mon profil</a>
                 {% if joueurConnected is empty %}
                     <a class="nav-link active" href="{{ path('app_login') }}">Se connecter</a>
 
                 {% else %}
+                    {% for role in joueurConnected.roles %}
+                        {% if role =='ROLE_JOUEUR' %}
+                            <a class="nav-link active" href="{{ path('app_home') }}">Mon profil</a>
+
+                            {% if role =='ROLE_ADMIN' %}
+                                <a class="nav-link active" href="{{ path('admin_index') }}">Accéder au back-office</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
                     <a class="nav-link active" href="{{ path('app_logout') }}">Se déconnecter</a>
                 {% endif %}
             </div>

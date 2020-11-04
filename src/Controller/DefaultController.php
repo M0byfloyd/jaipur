@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Repository\GameRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DefaultController extends AbstractController
@@ -19,14 +21,4 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/admin", name="admin_index")
-     */
-    public function admin()
-    {
-        return $this->render('admin/index.html.twig', [
-                'joueurConnected' => $this->getUser(),
-            ]
-        );
-    }
 }

@@ -47,11 +47,17 @@ class GameRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function partieJoueur($idJoueur) {
+        $games = $this->findBy(
+            ['user'=>$idJoueur]
+        );
+        return $games;
+    }
     public function getTerrain($id) {
         $game = $this->find($id);
         return $game->getTerrain();
-
     }
+
     public function findTokens($id,$ressource) {
         $game = $this->find($id);
         $allTokens = $game->getTokens();

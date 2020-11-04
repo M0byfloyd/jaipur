@@ -34,6 +34,7 @@ class GameController extends AbstractController
         ];
         return $data;
     }
+
     function defJoueurActif($game)
     {
 
@@ -57,8 +58,7 @@ class GameController extends AbstractController
             for ($i = 0; $i <= 5 - count($renvoisCarteTerrain); $i++) {
                 $renvoisCarteTerrain[] = array_pop($pioche);
             }
-        }
-        else {
+        } else {
             $pioche = $game->getPioche();
         }
         $game->setPioche($pioche);
@@ -71,8 +71,10 @@ class GameController extends AbstractController
      */
     public function index(GameRepository $gameRepository): Response
     {
+
+
         return $this->render('game/index.html.twig', [
-            'games' => $gameRepository->findAll(),
+            'games' => $gameRepository->partieJoueur($this->getUser()->getId()),
             'joueurConnected' => $this->getUser()
 
         ]);
@@ -179,8 +181,8 @@ class GameController extends AbstractController
     public function selectAdversaire(UserRepository $userRepository)
     {
 
-        $users = $userRepository->findByRole('ROLE_JOUEUR');
-
+        //$users = $userRepository->findByRole('ROLE_JOUEUR');
+        $users = $userRepository->selectJoueur($this->getUser()->getLogin());
         return $this->render('game/selectAdversaire.html.twig', [
             'users' => $users,
             'joueurConnected' => $this->getUser()
@@ -450,10 +452,10 @@ class GameController extends AbstractController
 
             if ($joueur1->getPoints() !== $joueur2->getPoints()) {
                 if ($joueur1->getPoints() > $joueur2->getPoints()) {
-                    $joueur1->setMancheWin($joueur1->getManche()+1);
+                    $joueur1->setMancheWin($joueur1->getManche() + 1);
                     $gagnant = $joueur1->getUser()->getLogin();
                 } else {
-                    $joueur2->setMancheWin($joueur2->getMancheWin()+1);
+                    $joueur2->setMancheWin($joueur2->getMancheWin() + 1);
                     $gagnant = $joueur2->getUser()->getLogin();
                 }
             } else {
@@ -580,7 +582,7 @@ class GameController extends AbstractController
             $game->setTokens($tableauTokens);
             $game->setSpecialTokens($tableauSpecialTokens);
 
-            $game->setStatut($game->getStatut()+1);
+            $game->setStatut($game->getStatut() + 1);
             $game->setJoueurActif(0);
 
             //Persist des données
@@ -590,7 +592,7 @@ class GameController extends AbstractController
 
 
             $entityManager->flush();
-                return $this->json($gagnant);
+            return $this->json($gagnant);
 
 
         }
@@ -795,7 +797,7 @@ class GameController extends AbstractController
                 return $this->json('tropdecarte');
             }*/
             if (count(array_unique($sendCardRessource)) == count($sendCardRessource)) {
-                return $this->json($this->sendData("error",'Les cartes doivent être du même type'));
+                return $this->json($this->sendData("error", 'Les cartes doivent être du même type'));
             } else {
                 $tableauCards = $cardRepository->findArrayById();
                 $tableauTokens = $tokenRepository->findArrayById();
