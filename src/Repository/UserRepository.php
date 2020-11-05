@@ -64,7 +64,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
-    public function selectJoueur($role)
+    public function findByRole($role)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('u')

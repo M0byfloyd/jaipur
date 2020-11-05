@@ -181,8 +181,8 @@ class GameController extends AbstractController
     public function selectAdversaire(UserRepository $userRepository)
     {
 
-        //$users = $userRepository->findByRole('ROLE_JOUEUR');
-        $users = $userRepository->selectJoueur($this->getUser()->getLogin());
+        $users = $userRepository->findByRole('ROLE_JOUEUR');
+        //$users = $userRepository->selectJoueur($this->getUser()->getLogin());
         return $this->render('game/selectAdversaire.html.twig', [
             'users' => $users,
             'joueurConnected' => $this->getUser()
