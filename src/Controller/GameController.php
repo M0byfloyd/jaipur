@@ -318,14 +318,10 @@ class GameController extends AbstractController
 
         //Vérification chammeaux
 
-        dump($listeChammeaux);
-        dump($mainJ1);
+
         // Pour chaque chamal dans chammeaux
         foreach ($listeChammeaux as $chammal) {
-            dump('chamal id' . $chammal->getId());
-            dump(array_search($chammal->getId(), $mainJ1));
             if (array_search($chammal->getId(), $mainJ1) != false) {
-                dump('Il faut supprimer l\'index ' . array_search($chammal->getId(), $mainJ1));
                 array_splice($mainJ1, array_search($chammal->getId(), $mainJ1), 1);
                 $playJoueur1->setCamel($playJoueur1->getCamel() + 1);
             }
@@ -334,7 +330,6 @@ class GameController extends AbstractController
         //Assignation des 5 cartes au joueur 1
         $playJoueur1->setDeck($mainJ1);
 
-        dump($playJoueur1);
 
         //Ajout d'une interface pour le joueur 2
 
@@ -353,10 +348,8 @@ class GameController extends AbstractController
         //Vérification chammeaux
 
         foreach ($listeChammeaux as $chammal) {
-            dump('chamal id' . $chammal->getId());
-            dump(array_search($chammal->getId(), $mainJ2));
+
             if (array_search($chammal->getId(), $mainJ2) != false) {
-                dump('Il faut supprimer l\'index ' . array_search($chammal->getId(), $mainJ2));
                 array_splice($mainJ2, array_search($chammal->getId(), $mainJ2), 1);
                 $playJoueur2->setCamel($playJoueur2->getCamel() + 1);
             }
@@ -527,10 +520,8 @@ class GameController extends AbstractController
 
             // Pour chaque chamal dans
             foreach ($listeChammeaux as $chammal) {
-                dump('chamal id' . $chammal->getId());
-                dump(array_search($chammal->getId(), $mainJ1));
+
                 if (array_search($chammal->getId(), $mainJ1) != false) {
-                    dump('Il faut supprimer l\'index ' . array_search($chammal->getId(), $mainJ1));
                     array_splice($mainJ1, array_search($chammal->getId(), $mainJ1), 1);
                     $joueur1->setCamel($joueur1->getCamel() + 1);
                 }
@@ -553,10 +544,8 @@ class GameController extends AbstractController
             //Vérification chammeaux
 
             foreach ($listeChammeaux as $chammal) {
-                dump('chamal id' . $chammal->getId());
-                dump(array_search($chammal->getId(), $mainJ2));
+
                 if (array_search($chammal->getId(), $mainJ2) != false) {
-                    dump('Il faut supprimer l\'index ' . array_search($chammal->getId(), $mainJ2));
                     array_splice($mainJ2, array_search($chammal->getId(), $mainJ2), 1);
                     $joueur2->setCamel($joueur2->getCamel() + 1);
                 }

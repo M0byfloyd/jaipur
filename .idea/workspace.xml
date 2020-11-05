@@ -34,12 +34,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/GameRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GameRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PlayUserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PlayUserRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/game/accueil.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/accueil.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -267,6 +264,9 @@
       <workItem from="1604437026301" duration="8339000" />
       <workItem from="1604474241598" duration="17576000" />
       <workItem from="1604532941155" duration="5328000" />
+      <workItem from="1604569477555" duration="1084000" />
+      <workItem from="1604572385589" duration="776000" />
+      <workItem from="1604579440287" duration="303000" />
     </task>
     <servers />
   </component>
