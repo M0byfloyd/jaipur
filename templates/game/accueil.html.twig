@@ -21,7 +21,7 @@
     <div class="row col-12">
     {% for partie in partieEnCours %}
         <div class="row col-12 justify-content-center">
-        <a class="text-center" href="{{ path('show_game',{'game' : partie.id}) }}">Partie n°{{ partie.id }}</a>
+        <a class="text-center" href="{{ path('show_game',{'game' : partie.game.id }) }}">Partie n°{{ partie.game.id }}</a>
         </div>
     {% endfor %}
     </div>

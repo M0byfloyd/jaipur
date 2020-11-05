@@ -164,10 +164,7 @@ class GameController extends AbstractController
         GameRepository $gameRepository
     )
     {
-        $partieEnCours = $gameRepository->findBy(
-            ['statut' => 0],
-            ['id' => 'DESC']
-        );
+        $partieEnCours = $playUserRepository->partieJoueur($this->getUser());
         return $this->render('game/accueil.html.twig', [
             'controller_name' => 'GameController',
             'joueurConnected' => $this->getUser(),

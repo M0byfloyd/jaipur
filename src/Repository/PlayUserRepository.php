@@ -47,7 +47,12 @@ class PlayUserRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    public function partieJoueur($user) {
+        $games = $this->findBy(
+            ['user'=>$user]
+        );
+        return $games;
+    }
     public function findPlayUser($game_id, $joueur_id)
     {
         $qb = $this->_em->createQueryBuilder();
