@@ -42,10 +42,9 @@
                     {% for role in joueurConnected.roles %}
                         {% if role =='ROLE_JOUEUR' %}
                             <a class="nav-link active" href="{{ path('app_home') }}">Mon profil</a>
-
-                            {% if role =='ROLE_ADMIN' %}
-                                <a class="nav-link active" href="{{ path('admin_index') }}">Accéder au back-office</a>
-                            {% endif %}
+                        {% endif %}
+                        {% if role =='ROLE_ADMIN' %}
+                            <a class="nav-link active" href="{{ path('admin_index') }}">Accéder au back-office</a>
                         {% endif %}
                     {% endfor %}
                     <a class="nav-link active" href="{{ path('app_logout') }}">Se déconnecter</a>

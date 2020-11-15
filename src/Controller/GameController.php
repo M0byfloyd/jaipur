@@ -373,6 +373,8 @@ class GameController extends AbstractController
 
         $game->setTokens($tableauTokens);
         $game->setSpecialTokens($tableauSpecialTokens);
+        $playJoueur1->setPret(0);
+        $playJoueur2->setPret(0);
 
         $game->setStatut(0);
         $game->setJoueurActif(0);

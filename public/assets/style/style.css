@@ -16,6 +16,7 @@ body {
 h1{
     color:#c4b9b1;
     font-family: 'Caveat Brush', cursive;
+    text-align: center;
 }
 h2{
     color:#c4b9b1;
@@ -109,7 +110,14 @@ form{
     padding-left: 50px;
     height: 100vh;
 }
-#titleinscri, #titleconnect{
+
+.titleinscri{
     text-align: center;
-    margin-top:20vh;
+
+}
+.col-8{
+    margin: 3% 0;
+}
+#boutons{
+    padding-bottom: 5%;
 }
