@@ -35,8 +35,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e4065954-e8b2-439c-adb2-cb04a591da0c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/GameController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/GameController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/PlayUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/PlayUser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/game/showGame.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/game/showGame.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +271,21 @@
       <workItem from="1604532941155" duration="5328000" />
       <workItem from="1604569477555" duration="1084000" />
       <workItem from="1604572385589" duration="776000" />
-      <workItem from="1604579440287" duration="303000" />
+      <workItem from="1604579440287" duration="1026000" />
+      <workItem from="1604759521189" duration="1577000" />
+      <workItem from="1605036477156" duration="7629000" />
+      <workItem from="1605105205436" duration="2251000" />
+      <workItem from="1605132386445" duration="404000" />
+      <workItem from="1605132820319" duration="91000" />
+      <workItem from="1605133458306" duration="7217000" />
+      <workItem from="1605167817069" duration="616000" />
+      <workItem from="1605201752285" duration="11364000" />
+      <workItem from="1605259686110" duration="5312000" />
+      <workItem from="1605272797310" duration="2044000" />
+      <workItem from="1605295804901" duration="761000" />
+      <workItem from="1605357379601" duration="6964000" />
+      <workItem from="1605391726064" duration="32000" />
+      <workItem from="1605449052233" duration="5013000" />
     </task>
     <servers />
   </component>
@@ -286,6 +305,11 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="552" y="183" key="#Deployment" timestamp="1605272932437">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="552" y="183" key="#Deployment/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1605272932437" />
+    <state x="2472" y="183" key="#Deployment/0.0.1920.1050/1920.0.1920.1050@1920.0.1920.1050" timestamp="1605260957252" />
     <state x="552" y="165" key="#Plugins" timestamp="1601976317449">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -315,6 +339,10 @@
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="1053" y="100" width="774" height="857" key="DiffContextDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150596887" />
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1605259804647">
+      <screen x="0" y="0" width="1920" height="1050" />
+    </state>
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1605259804647" />
     <state x="304" y="412" key="Github.CreateGistDialog" timestamp="1601019735473">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
@@ -354,21 +382,22 @@
     </state>
     <state x="0" y="173" key="SettingsEditor/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1602753374322" />
     <state x="0" y="173" key="SettingsEditor/0.0.1920.1050@0.0.1920.1050" timestamp="1601976942017" />
-    <state width="498" height="444" key="SwitcherDM" timestamp="1602001580044">
+    <state width="498" height="444" key="SwitcherDM" timestamp="1605368316709">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state width="498" height="444" key="SwitcherDM/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1602001580044" />
+    <state width="498" height="444" key="SwitcherDM/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1605368316709" />
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1604441284340">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150596887" />
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1604441284340" />
     <state x="93" y="100" width="774" height="857" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1601018960928" />
-    <state x="128" y="178" width="1620" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1604388476139">
+    <state x="128" y="178" width="1620" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1605136758069">
       <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="478" y="178" width="774" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050/-1920.0.1920.1050@0.0.1920.1050" timestamp="1604150253521" />
-    <state x="128" y="178" width="1620" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1604388476139" />
+    <state x="128" y="178" width="1620" height="857" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050/1920.0.1920.1050@0.0.1920.1050" timestamp="1605136758069" />
     <state x="93" y="100" width="774" height="857" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1602684717223" />
     <state x="1257" y="442" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1601899306288">
       <screen x="0" y="0" width="1920" height="1050" />

@@ -26,6 +26,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class GameController extends AbstractController
 {
+
     function sendData($check = "erreur", $message = "message non formaté")
     {
         $data = [
@@ -48,7 +49,6 @@ class GameController extends AbstractController
 
     function remiseTerrain($game)
     {
-
         $recupCarteTerrain = $game->getTerrain();
         foreach ($recupCarteTerrain as $item) {
             $renvoisCarteTerrain[] = $item;
@@ -392,6 +392,55 @@ class GameController extends AbstractController
     }
 
     //PARTIE
+    /**
+     * @Route("game/quipret/{game}", name="qui_pret")
+     */
+    public function quiPret(Game $game, Request $request) {
+        $gagnanPlayUser = $request->request->get('gagnantPlayUser');
+        $perdantPlayUser = $request->request->get('perdantPlayUser');
+
+        $gagnantId = $request->request->get('gagnantId');
+        $gagnantPret= $request->request->get('gagnantPret');
+        $perdantId = $request->request->get('perdantId');
+        $perdantPret= $request->request->get('perdantPret');
+        $joueur1 = $game->getGameUser()[0];
+        $joueur2 = $game->getGameUser()[1];
+
+        if ($this->getUser()->getId() == $gagnantId ) {
+            $data = [
+                'qui'=>'gagnant',
+                'playUser'=> $gagnanPlayUser,
+                'pret'=> [
+                    'gagnant'=>$gagnantPret,
+                    'perdant'=>$perdantPret
+
+                ]
+            ];
+       }
+        elseif ( $this->getUser()->getId() == $perdantId) {
+            $data = [
+                'idActu'=>$this->getUser()->getId(),
+                'perdantId'=>$perdantId,
+                'playUser'=>$perdantPlayUser,
+                'qui'=>'perdant',
+                'pret'=>[
+                    'gagnant'=>$gagnantPret,
+                    'perdant'=>$perdantPret
+                ]
+            ];
+        }
+
+        return $this->json($data);
+    }
+    /**
+     * @Route("game/makeplayuserpret/", name="make_play_user_pret")
+     */
+    public function makePLayUserPret(Request $request) {
+        $playUserCo = $request->request->get('joueurActuel');
+        return $this->json($playUserCo);
+
+
+    }
 
     /**
      * @Route("game/quijoue/{game}", name="qui_joue")
@@ -399,30 +448,6 @@ class GameController extends AbstractController
     public function quiJoue(Game $game)
     {
         $joueurs = $game->getGameUser();
-
-        if ($game->getJoueurActif() == 0 && $joueurs[0]->getUser()->getId() == $this->getUser()->getId()) {
-            return $this->json('jejoue');
-        } elseif ($game->getJoueurActif() == 1 && $joueurs[1]->getUser()->getId() == $this->getUser()->getId()) {
-            return $this->json('jejoue');
-        } else {
-            return $this->json('monadversairejoue');
-        }
-
-    }
-
-    /**
-     * @Route("game/refresh-plateau/{game}", name="refresh_plateau")
-     */
-    public function refreshPlateau(
-        EntityManagerInterface $entityManager,
-        CardRepository $cardRepository,
-        TokenRepository $tokenRepository,
-        SpecialTokenRepository $specialTokenRepository, Game $game)
-    {
-        $tableauCards = $cardRepository->findArrayById();
-        $tableauTokens = $tokenRepository->findArrayById();
-        $tableauSpecialToken = $specialTokenRepository->findArrayById();
-        $this->remiseTerrain($game);
 
         function videOuNon($ressJeton)
         {
@@ -441,149 +466,200 @@ class GameController extends AbstractController
             $joueur2 = $game->getGameUser()[1];
 
             if ($joueur1->getPoints() !== $joueur2->getPoints()) {
+                //TODO SWITCH ?
                 if ($joueur1->getPoints() > $joueur2->getPoints()) {
-                    $joueur1->setMancheWin($joueur1->getManche() + 1);
-                    $gagnant = $joueur1->getUser()->getLogin();
+                    $joueur1->setMancheWin($joueur1->getMancheWin() + 1);
+                    $gagnant = $joueur1;
+                    $perdant = $joueur2;
+
                 } else {
                     $joueur2->setMancheWin($joueur2->getMancheWin() + 1);
-                    $gagnant = $joueur2->getUser()->getLogin();
+                    $gagnant = $joueur2;
+                    $perdant = $joueur1;
                 }
+                $gagnantUser = $gagnant->getUser();
+                $perdantUser = $perdant->getUser();
+                $reponse = [
+                    'message' => 'finmanche',
+                    'perdant'=> [
+                        'playUser'=>$perdant,
+                        'pret'=>$perdant->getPret(),
+                        'id_user'=>$perdantUser->getId(),
+                        'login'=>$perdantUser->getLogin(),
+                        'points'=>$perdant->getPoints(),
+                        'mancheWin'=>$perdant->getMancheWin()
+                    ],
+                    'gagnant'=> [
+                        'playUser'=>$gagnant,
+                        'pret'=>$gagnant->getPret(),
+                        'id_user'=>$gagnantUser->getId(),
+                        'login'=>$gagnantUser->getLogin(),
+                        'points'=>$gagnant->getPoints(),
+                        'mancheWin'=>$gagnant->getMancheWin()
+                    ]
+                    ];
             } else {
                 $finManche = 'égalité';
             }
-            //Récupération des cartes
-            $cards = $cardRepository->findAll();
+            /*//Récupération des cartes
+        $cards = $cardRepository->findAll();
 
-            $listeChammeaux = $cardRepository->findBy(
-                ['ressources' => 'mammouth']
-            );
-
-
-            //Récupéation des jetons
-            $tokens = $tokenRepository->findBy([], array('value' => 'ASC'));
-
-            //Récupération des jetons spéciaux
-            $specialTokens = $specialTokenRepository->findAll();
+        $listeChammeaux = $cardRepository->findBy(
+            ['ressources' => 'mammouth']
+        );
 
 
-            //Création des tableaux de données
-            $tableauCards = [];
-            $tableauTokens = [];
-            $tableauSpecialTokens = [
-                3 => [],
-                4 => [],
-                5 => []
-            ];
+        //Récupéation des jetons
+        $tokens = $tokenRepository->findBy([], array('value' => 'ASC'));
 
-            foreach (Token::RESSOURCE as $ressource) {
-                $tableauTokens[$ressource] = [];
+        //Récupération des jetons spéciaux
+        $specialTokens = $specialTokenRepository->findAll();
+
+
+        //Création des tableaux de données
+        $tableauCards = [];
+        $tableauTokens = [];
+        $tableauSpecialTokens = [
+            3 => [],
+            4 => [],
+            5 => []
+        ];
+
+        foreach (Token::RESSOURCE as $ressource) {
+            $tableauTokens[$ressource] = [];
+        }
+        foreach ($tokens as $token) {
+            $tableauTokens[$token->getRessource()][] = $token->getId();
+        }
+
+        foreach ($specialTokens as $token) {
+            $tableauSpecialTokens[$token->getNbCards()][] = $token->getId();
+        }
+
+        //Mélange des tableau de jetons spéciaux
+        shuffle($tableauSpecialTokens[3]);
+        shuffle($tableauSpecialTokens[4]);
+        shuffle($tableauSpecialTokens[5]);
+
+
+        //Création du terrain
+        $terrain = [];
+        $max = 0;
+        //Ajout de trois mammouth en début de partie sur le terrain
+        foreach ($cards as $card) {
+            if ($card->getCamel() === true && $max < 3) {
+                $terrain[] = $card->getId();
+                $max++;
+            } else {
+                $tableauCards[] = $card->getId();
             }
-            foreach ($tokens as $token) {
-                $tableauTokens[$token->getRessource()][] = $token->getId();
+        }
+
+        shuffle($tableauCards);
+
+
+        //Distribution de 5 cartes au joueur 1
+        $joueur1->setCamel(0);
+        $mainJ1 = [];
+        for ($i = 0; $i < 5; $i++) {
+            $mainJ1[] = array_pop($tableauCards);
+        }
+
+        //Vérification chammeaux
+
+
+        // Pour chaque chamal dans
+        foreach ($listeChammeaux as $chammal) {
+
+            if (array_search($chammal->getId(), $mainJ1) != false) {
+                array_splice($mainJ1, array_search($chammal->getId(), $mainJ1), 1);
+                $joueur1->setCamel($joueur1->getCamel() + 1);
             }
+        }
 
-            foreach ($specialTokens as $token) {
-                $tableauSpecialTokens[$token->getNbCards()][] = $token->getId();
-            }
+        //Assignation des 5 cartes au joueur 1
+        $joueur1->setDeck($mainJ1);
 
-            //Mélange des tableau de jetons spéciaux
-            shuffle($tableauSpecialTokens[3]);
-            shuffle($tableauSpecialTokens[4]);
-            shuffle($tableauSpecialTokens[5]);
+        //Ajout d'une interface pour le joueur 2
 
+        $joueur2->setCamel(0);
 
-            //Création du terrain
-            $terrain = [];
-            $max = 0;
-            //Ajout de trois mammouth en début de partie sur le terrain
-            foreach ($cards as $card) {
-                if ($card->getCamel() === true && $max < 3) {
-                    $terrain[] = $card->getId();
-                    $max++;
-                } else {
-                    $tableauCards[] = $card->getId();
-                }
-            }
-
-            shuffle($tableauCards);
-
-
-            //Distribution de 5 cartes au joueur 1
-            $joueur1->setCamel(0);
-            $mainJ1 = [];
-            for ($i = 0; $i < 5; $i++) {
-                $mainJ1[] = array_pop($tableauCards);
-            }
-
-            //Vérification chammeaux
-
-
-            // Pour chaque chamal dans
-            foreach ($listeChammeaux as $chammal) {
-
-                if (array_search($chammal->getId(), $mainJ1) != false) {
-                    array_splice($mainJ1, array_search($chammal->getId(), $mainJ1), 1);
-                    $joueur1->setCamel($joueur1->getCamel() + 1);
-                }
-            }
-
-            //Assignation des 5 cartes au joueur 1
-            $joueur1->setDeck($mainJ1);
-
-            //Ajout d'une interface pour le joueur 2
-
-            $joueur2->setCamel(0);
-
-            //on distribue 5 cartes au joueur 2
-            $mainJ2 = [];
-            for ($i = 0; $i < 5; $i++) {
-                $mainJ2[] = array_pop($tableauCards);
-
-            }
-
-            //Vérification chammeaux
-
-            foreach ($listeChammeaux as $chammal) {
-
-                if (array_search($chammal->getId(), $mainJ2) != false) {
-                    array_splice($mainJ2, array_search($chammal->getId(), $mainJ2), 1);
-                    $joueur2->setCamel($joueur2->getCamel() + 1);
-                }
-            }
-            //Assignation des 5 cartes au joueur 2
-
-            $joueur2->setDeck($mainJ2);
-
-            $joueur1->setPoints(0);
-            $joueur2->setPoints(0);
-
-            $terrain[] = array_pop($tableauCards);
-            $terrain[] = array_pop($tableauCards);
-
-
-            $game->setTerrain($terrain);
-
-            $game->setPioche($tableauCards);
-
-            $game->setTokens($tableauTokens);
-            $game->setSpecialTokens($tableauSpecialTokens);
-
-            $game->setStatut($game->getStatut() + 1);
-            $game->setJoueurActif(0);
-
-            //Persist des données
-            $entityManager->persist($game);
-            $entityManager->persist($joueur1);
-            $entityManager->persist($joueur2);
-
-
-            $entityManager->flush();
-            return $this->json($gagnant);
-
+        //on distribue 5 cartes au joueur 2
+        $mainJ2 = [];
+        for ($i = 0; $i < 5; $i++) {
+            $mainJ2[] = array_pop($tableauCards);
 
         }
 
-        $entityManager->flush();
+        //Vérification chammeaux
+
+        foreach ($listeChammeaux as $chammal) {
+
+            if (array_search($chammal->getId(), $mainJ2) != false) {
+                array_splice($mainJ2, array_search($chammal->getId(), $mainJ2), 1);
+                $joueur2->setCamel($joueur2->getCamel() + 1);
+            }
+        }
+        //Assignation des 5 cartes au joueur 2
+
+        $joueur2->setDeck($mainJ2);
+
+        $joueur1->setPoints(0);
+        $joueur2->setPoints(0);
+
+        $terrain[] = array_pop($tableauCards);
+        $terrain[] = array_pop($tableauCards);
+
+
+        $game->setTerrain($terrain);
+
+        $game->setPioche($tableauCards);
+
+        $game->setTokens($tableauTokens);
+        $game->setSpecialTokens($tableauSpecialTokens);
+
+        $game->setStatut($game->getStatut() + 1);
+        $game->setJoueurActif(0);
+
+        //Persist des données
+        $entityManager->persist($game);
+        $entityManager->persist($joueur1);
+        $entityManager->persist($joueur2);
+
+
+        $entityManager->flush();*/
+        } else {
+
+            if ($game->getJoueurActif() == 0 && $joueurs[0]->getUser()->getId() == $this->getUser()->getId()) {
+                $reponse = ['message' => 'jejoue'];
+            } elseif ($game->getJoueurActif() == 1 && $joueurs[1]->getUser()->getId() == $this->getUser()->getId()) {
+                $reponse = ['message' => 'jejoue'];
+            } else {
+                $reponse = ['message' => 'monadversairejoue'];
+
+            }
+
+        }
+
+        return $this->json($reponse);
+    }
+
+
+    /**
+     * @Route("game/refresh-plateau/{game}", name="refresh_plateau")
+     */
+    public function refreshPlateau(
+        EntityManagerInterface $entityManager,
+        CardRepository $cardRepository,
+        TokenRepository $tokenRepository,
+        SpecialTokenRepository $specialTokenRepository, Game $game)
+    {
+        $tableauCards = $cardRepository->findArrayById();
+        $tableauTokens = $tokenRepository->findArrayById();
+        $tableauSpecialToken = $specialTokenRepository->findArrayById();
+        $this->remiseTerrain($game);
+
+
 
         return $this->render('game/plateau.html.twig', [
             'game' => $game,
@@ -594,7 +670,6 @@ class GameController extends AbstractController
             'tableauTokens' => $tableauTokens,
             'tableauSpecialToken' => $tableauSpecialToken
         ]);
-
     }
 
     /**
@@ -669,6 +744,9 @@ class GameController extends AbstractController
                 'tabTerrain' => $tabTerrain
             ];
             //return $this->json($dataMammoth);
+            if (empty($tabJoueurDeckId)) {
+                $tabJoueurDeckId = [];
+            }
             if (count($arrayTerrain) > (7 - count($tabJoueurDeckId))) {
                 return $this->json($this->sendData("error", 'Vous ne pouvez pas posséder plus de 7 cartes'));
             } else {
@@ -712,6 +790,7 @@ class GameController extends AbstractController
 
 
                 $game->setTerrain($tabTerrain);
+                $this->remiseTerrain($game);
 
                 $this->defJoueurActif($game);
 
@@ -809,11 +888,16 @@ class GameController extends AbstractController
                         unset($tabJoueurDeckId[$i]);
                     }
                 }
+                if (empty($tabJoueurDeckId)) {
+                    $tabJoueurDeckFinal = [];
+                } else {
+                    foreach ($tabJoueurDeckId as $item) {
+                        $tabJoueurDeckFinal[] = $item;
+                    }
+                }
                 array_values($tabJoueurDeckId);
 
-                foreach ($tabJoueurDeckId as $item) {
-                    $tabJoueurDeckFinal[] = $item;
-                }
+
                 //return $this->json($tabJoueurDeckId);
                 //JETOOOOOONNN
 
@@ -826,13 +910,20 @@ class GameController extends AbstractController
                     'sendCard' => $sendCardId,
                     'deck' => $tabJoueurDeckId,
                 ];
-
-                for ($iterationCount = 0; $iterationCount < count($arrayJoueur); $iterationCount++) {
-                    $der = count($pionsRessource) - 1;
-                    $pionContext = $tokenRepository->find($pionsRessource[$der]);
-                    $playJoueur->setPoints($playJoueur->getPoints() + $pionContext->getValue());
-                    unset($pionsRessource[$der]);
+                //return $this->json(count($arrayJoueur));
+                if ((count($pionsRessource) - count($arrayJoueur)) < 0) {
+                    //return $this->json('loul');
+                    $pionsRessource = [];
+                } else {
+                    //return $this->json('nope :'. (count($arrayJoueur) - count($pionsRessource) ));
+                    for ($iterationCount = 0; $iterationCount < count($arrayJoueur); $iterationCount++) {
+                        $der = count($pionsRessource) - 1;
+                        $pionContext = $tokenRepository->find($pionsRessource[$der]);
+                        $playJoueur->setPoints($playJoueur->getPoints() + $pionContext->getValue());
+                        unset($pionsRessource[$der]);
+                    }
                 }
+
                 //return $this->json(sendData('error',$pionsRessource));
                 //return $this->json(sendData($gameRepository->arrayToken($game->getId(),$sendCardRessource[0],$pionsRessource)));
 
@@ -934,6 +1025,7 @@ class GameController extends AbstractController
         $this->defJoueurActif($game);
         $game->setTerrain($tabTerrain);
         $playJoueur->setDeck($tabJoueurDeck);
+        $this->remiseTerrain($game);
 
         $entityManager->persist($game);
         $entityManager->persist($playJoueur);

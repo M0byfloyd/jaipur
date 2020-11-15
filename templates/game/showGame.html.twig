@@ -5,7 +5,29 @@
 {% endblock %}
 
 {% block body %}
+    <div style="display:none;" class="row" id="resultatDiv">
+        <h1 class="col-12 text-center">Résultats</h1>
+        <div class="row col-12">
+            <div class="col-6">
+                <h2 class="col-12 text-center" style="color: #0d5e42">Gagnant</h2>
+                <div class="col-12" id="affichageGagnant">
 
+                </div>
+                <div id="pretGagnant">
+                    <p id="pretTextGagnant"></p>
+                </div>
+            </div>
+            <div class="col-6">
+                <h2 class="col-12 text-center" style="color: #0d5e42">Perdant</h2>
+                <div class="col-12" id="affichagePerdant">
+
+                </div>
+                <div id="pretPerdant">
+                    <p id="pretTextPerdant"></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row" id="plateau"
          style="background: url('{{ asset('assets/img/fond_du_feu.png') }}'); background-size: cover;">
         {{ include('game/plateau.html.twig') }}
@@ -17,6 +39,7 @@
         .selectedCardTerrain {
             border: red solid 3px;
         }
+
         .selectedCardDeck {
             border: red solid 3px;
         }
@@ -25,7 +48,8 @@
         function selection() {
             $(this).css('border', '3px solid red')
         }
-        function checkError(data,action) {
+
+        function checkError(data, action) {
             if (data.check == "error") {
                 alert(data.message)
                 $(".selectedCardTerrain").removeClass("selectedCardTerrain")
@@ -107,7 +131,7 @@
                 data: {arrayTerrain: arrayTerrain},
                 method: 'POST',
                 success: function (data) {
-                    checkError(data,'prendre ok')
+                    checkError(data, 'prendre ok')
                 }
             })
         })
@@ -122,7 +146,7 @@
                 method: 'POST',
                 success: function (data) {
                     console.log(data)
-                    checkError(data,'vendre ok')
+                    checkError(data, 'vendre ok')
                 }
             })
         })
@@ -156,19 +180,116 @@
                 //data:,
                 method: 'POST',
                 success: function (data) {
-                    console.log(data)
-                    if (data == 'monadversairejoue') {
+                    console.log(data.message)
+                    if (data.message == 'monadversairejoue') {
+
+                        if (typeof compteur == "undefined") {
+                            console.log('TEST')
+                            compteur = true;
+                            $('#plateau').empty().load("{{ path('refresh_plateau', {game:game.id}) }}")
+                        }
+
                         $('#boutons').hide()
                         if (timeStop == false) {
                             console.log('tac');
                             timer = setInterval(refreshPlateau, 2000);
                             timeStop = true;
                         }
-                    } else {
+                    } else if (data.message == 'jejoue') {
                         $('#plateau').empty().load("{{ path('refresh_plateau', {game:game.id}) }}")
                         $('#plateau').show()
                         clearInterval(timer)
+                        delete compteur
                         timeStop = true
+                    } else {
+                        if (data.message == 'finmanche') {
+                            console.log('gagnant pret :' +data.perdant.pret)
+
+                            $('#plateau').hide()
+                            $('#resultatDiv').show()
+                            $('#affichageGagnant').append(
+                                '<h3 class="text-center">' + data.gagnant.login + '</h3>',
+                                '<p class="text-center">Point(s) : ' + data.gagnant.points + '</p>',
+                                '<div class="row col-12 justift-content-center"><img style="width:100px" src="{{ asset('img/jetons/feu_5.png' ) }}"/><p class="col-12">' + data.gagnant.mancheWin + '</p></div>',
+                            )
+                            $('#affichagePerdant').append(
+                                '<h3 class="text-center">' + data.perdant.login + '</h3>',
+                                '<p class="text-center">Point(s) : ' + data.perdant.points + '</p>',
+                                '<div class="row col-12 justift-content-center"><img style="width:100px" src="{{ asset('img/jetons/feu_5.png' ) }}"/><p class="col-12">' + data.perdant.mancheWin + '</p></div>',
+                            )
+
+                            timerPret = setInterval(pretOuPas, 750);
+                            function pretOuPas() {
+                                $.ajax({
+                                    url: "{{ path('qui_pret', {game: game.id }) }}",
+                                    data: {
+                                        gagnantId: data.gagnant.id_user,
+                                        gagnantPret : data.gagnant.pret,
+                                        perdantPret : data.perdant.pret,
+                                        perdantId: data.perdant.id_user,
+                                        gagnantPlayUser : data.gagnant.playUser,
+                                        perdantPlayUser : data.perdant.playUser
+                                    },
+                                    method: 'POST',
+                                    success: function (data) {
+                                        if (data.qui === "gagnant") {
+                                            console.log(data.pret)
+                                            $('#pretGagnant').html('<button id="boutonGagnant">Je suis prêt !(Pas encore disponible)</button>')
+
+                                            clearInterval(timerPret)
+                                            timerPerdantPret = setInterval(perdantPret, 1000)
+                                            timerGagnantPret = setInterval(gagnantPret, 1000)
+                                        }
+                                        else if (data.qui === "perdant") {
+                                            $('#pretPerdant').append('<button id="boutonPerdant">Je suis prêt !(Pas encore disponible)</button>')
+
+                                            //$('#boutonPerdant').onclick = joueurPret(joueurActuel)
+                                            clearInterval(timerPret)
+
+                                            timerPerdantPret = setInterval(perdantPret, 1000)
+                                            timerGagnantPret = setInterval(gagnantPret, 1000)
+                                        }
+                                    }
+                                })
+                            }
+                            function joueurPret(joueurActuel) {
+                                console.log('TESTENVOIS')
+                                $.ajax({
+                                    url:"{{ path('make_play_user_pret') }}",
+                                    data: {
+                                        joueurActuel : joueurActuel
+                                    },
+                                    method : 'POST',
+                                    success: function (data) {
+                                        console.log(data)
+                                    if (data == 'ok') {
+
+                                    }
+                                    }
+                                })
+                            }
+
+                            function gagnantPret() {
+                                if (data.gagnant.pret === true) {
+                                    $('#pretTextGagnant').text("PRET")
+                                    clearInterval(timerGagnantPret)
+                                } else {
+                                    $('#pretTextGagnant').text("PAS PRET")
+                                    console.log('Pas prêt')
+
+                                }
+                            }
+
+                            function perdantPret() {
+                                if (data.perdant.pret === true) {
+                                    $('#pretTextPerdant').text("PRET")
+                                    clearInterval(timerPerdantPret)
+                                } else {
+                                    $('#pretTextPerdant').text("PAS PRET")
+                                }
+                            }
+
+                        }
                     }
                 }
             })

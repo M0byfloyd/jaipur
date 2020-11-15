@@ -50,6 +50,11 @@ class PlayUser
      */
     private $mancheWin;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $pret;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -123,6 +128,18 @@ class PlayUser
     public function setMancheWin(int $mancheWin): self
     {
         $this->mancheWin = $mancheWin;
+
+        return $this;
+    }
+
+    public function getPret(): ?bool
+    {
+        return $this->pret;
+    }
+
+    public function setPret(bool $pret): self
+    {
+        $this->pret = $pret;
 
         return $this;
     }
